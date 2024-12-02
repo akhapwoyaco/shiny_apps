@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "locale": "en_KE",
+  "platform": "4.3.1",
+  "metadata": {
+    "appmode": "static",
+    "primary_rmd": null,
+    "primary_html": "README.html",
+    "content_category": null,
+    "has_parameters": false
+  },
+  "packages": null,
+  "files": {
+    ".RData": {
+      "checksum": "92b69dea3392a98592eed480fe405c2f"
+    },
+    "README.html": {
+      "checksum": "707465863909738f5a4abd7af5a59bd5"
+    },
+    "README.md": {
+      "checksum": "fa82b53493f48e42052ac123dad62695"
+    },
+    "weather_app/app.R": {
+      "checksum": "13016f9b520f6a99c94d024f414a5e17"
+    },
+    "weather_app/data/geo_data.RData": {
+      "checksum": "cfcc3f8b0d92e0a0d214c18613a411df"
+    },
+    "weather_app/data/weather.RData": {
+      "checksum": "9be6aadbcf08a07f2fd4e9c21c58bd25"
+    },
+    "weather_app/trials/mmm.R": {
+      "checksum": "54059102a46df3f2eb2d03b202622098"
+    },
+    "weather_app/trials/trial.R": {
+      "checksum": "6fc2898b025d607faf948fab7c20287a"
+    },
+    "weather_app/trials/weather.py": {
+      "checksum": "fba81b4938f9b52c39e75719e38e1562"
+    },
+    "weather_app/trials/WEATHER_DATA_CREATION_APP.R": {
+      "checksum": "cc872d33fe015f2af46c3846d9f6a153"
+    },
+    "weather_app/trials/weather_updated.R": {
+      "checksum": "5caab6c81cd19291bc48f77dde00a9ae"
+    },
+    "world_bank/dataset_2024-11-30T14_49_34.831605686Z_DEFAULT_INTEGRATION_IMF.FAD_FM_2.0.0.csv": {
+      "checksum": "6e3f2f3d242e7d7de4293426ff814a93"
+    },
+    "world_bank/trial.R": {
+      "checksum": "a1debf5be86910e5b496c591b73534b1"
+    }
+  },
+  "users": null
+}
