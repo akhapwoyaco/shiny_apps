@@ -4,6 +4,7 @@ A list of R shiny Apps
 
 ## [Kenya Administrative Wards Historical and Forecast Weather Visuals](./weather_app)
 
+Link: [Shiny App](https://019387c9-7f31-2de1-6cc8-bcd45454524b.share.connect.posit.cloud)
 Shiny App feature
 
 -   Left to Right Swap Button
