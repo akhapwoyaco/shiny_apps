@@ -6,6 +6,7 @@ library(tidyverse)
 library(lubridate)
 library(DT)
 library(shinyWidgets)   
+library(sf)
 #
 load('data/weather.RData')
 load('data/geo_data.RData')    
