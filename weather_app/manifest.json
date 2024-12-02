@@ -3858,27 +3858,27 @@
   },
   "files": {
     "app.R": {
-      "checksum": "9284113dab1c89128a9e1bb876982602"
+      "checksum": "62f286cb9f49b37dc0cd6a248d88127c"
     },
-    "geo_data.RData": {
+    "data/geo_data.RData": {
       "checksum": "cfcc3f8b0d92e0a0d214c18613a411df"
     },
-    "mmm.R": {
-      "checksum": "54059102a46df3f2eb2d03b202622098"
-    },
-    "trial.R": {
-      "checksum": "6fc2898b025d607faf948fab7c20287a"
-    },
-    "weather.py": {
-      "checksum": "fba81b4938f9b52c39e75719e38e1562"
-    },
-    "weather.RData": {
+    "data/weather.RData": {
       "checksum": "9be6aadbcf08a07f2fd4e9c21c58bd25"
     },
-    "WEATHER_DATA_CREATION_APP.R": {
+    "trials/mmm.R": {
+      "checksum": "54059102a46df3f2eb2d03b202622098"
+    },
+    "trials/trial.R": {
+      "checksum": "6fc2898b025d607faf948fab7c20287a"
+    },
+    "trials/weather.py": {
+      "checksum": "fba81b4938f9b52c39e75719e38e1562"
+    },
+    "trials/WEATHER_DATA_CREATION_APP.R": {
       "checksum": "cc872d33fe015f2af46c3846d9f6a153"
     },
-    "weather_updated.R": {
+    "trials/weather_updated.R": {
       "checksum": "5caab6c81cd19291bc48f77dde00a9ae"
     }
   },
