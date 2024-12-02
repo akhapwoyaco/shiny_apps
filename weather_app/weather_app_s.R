@@ -84,17 +84,26 @@ ui <- fluidPage(
     ),
   ),
   br(),
-  plotOutput('gg_plot'),
+  plotOutput('gg_plot_rain'),
   absolutePanel(
     id = "leaf_map_panel", 
     class = "panel panel-default", fixed = TRUE,
-    draggable = TRUE, top = 10, left = "auto", right = 100, bottom = "auto",
-    width = 200, height = 150, style = "opacity: 0.5;",
+    draggable = TRUE, top = 200, left = "auto", right = 100, bottom = "auto",
+    width = 200, height = 100, style = "opacity: 0.3;",
     leafletOutput('map')
     #plotOutput('map')
   ),
   br(),
-  DT::dataTableOutput("weather_table")
+  plotOutput("gg_plot_temp"),
+  br(),
+  plotOutput("gg_plot_monthly"),
+  br(),
+  plotOutput("gg_plot_monthly_hist"),
+  br(),
+  DT::dataTableOutput("weather_table"),
+  br(),
+  plotOutput("gg_plot_all"), 
+  br()
 )
 
 server <- function(input, output, session) {
@@ -174,6 +183,49 @@ server <- function(input, output, session) {
     #   
   })
   #
+  all_years_rf <- reactive({
+    req(ward_code())
+    # print(ward_layer())
+    all_year_url = "https://kaop.co.ke/weather_api//historic_yearly_rainfall"
+    json_data = jsonlite::toJSON(
+      list(
+        "dataSrcId" = "1", "fromMonth" = "1", "fromWeek" = "1", "rfGte" = "0", 
+        "rfLt" = "0", "toMonth" = "12", "toWeek" = "52", "wardCode" = ward_code()
+      ),
+      pretty = T, auto_unbox = T
+    )
+    # print(json_data)
+    resp = POST(
+      all_year_url,
+      body =json_data
+    )
+    data_final = jsonlite::fromJSON(
+      content(resp, 'text', encoding = 'UTF-8'))
+    # print(data_final)
+    data_final$data$all_years_rf_vals 
+  })
+  #
+  monthly_rf_vals <- reactive({
+    req(ward_code())
+    # print(ward_layer())
+    all_year_url = "https://kaop.co.ke/weather_api//current_monthly_rainfall"
+    json_data = jsonlite::toJSON(
+      list(
+        "dataSrcId" = "1", "fromMonth" = "0", "fromWeek" = "0", "rfGte" = "0", 
+        "rfLt" = "0", "toMonth" = "0", "toWeek" = "0", "wardCode" = ward_code()
+      ),
+      pretty = T, auto_unbox = T
+    )
+    # print(json_data)
+    resp = POST(
+      all_year_url,
+      body =json_data
+    )
+    data_final = jsonlite::fromJSON(
+      content(resp, 'text', encoding = 'UTF-8'))
+    data_final
+  })
+  #
   # Reactive value to store the current ward index
   current_ward_i <- reactiveVal(1)
   
@@ -242,7 +294,8 @@ server <- function(input, output, session) {
         color = 'black', weight = 1, layerId = ~uid)
   })
   #
-  output$gg_plot <- renderPlot({
+  output$gg_plot_rain <- renderPlot({
+    # print(ward_data())
     ward_data() |> 
       ggplot() +
       geom_col(
@@ -255,16 +308,45 @@ server <- function(input, output, session) {
                     label = rainfall),
                 vjust = -1) +
       scale_y_continuous(
-        name = "Rainfall (mm)",
+        name = "Forecast Rainfall (mm)",labels = scales::unit_format(unit = 'mm'),
         sec.axis = sec_axis(
           ~.*1,
-          name = "Humidity (%)"
+          name = "Forecast Humidity (%)", labels = scales::unit_format(unit = '%')
         )) +
       scale_x_date(
         date_breaks = "1 day",
         expand = c(0,0),
         date_labels = "%d-%m-%y") +
+      labs(caption = "Code: https://github.com/akhapwoyaco  Source: https://kaop.co.ke/") +
       theme_minimal(base_size = 18) +
+      theme(
+        panel.grid.minor.x = element_blank(),
+        axis.line.y = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.title.y.right = element_text(angle = 90),
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(face = "bold", size = rel(0.7)),
+        axis.ticks = element_line()
+      )
+  })
+  #
+  output$gg_plot_temp <- renderPlot({
+    
+    ward_data() |> 
+      ggplot(aes(x = date)) +
+      geom_line(aes(y = temp_min)) +
+      geom_line(aes(y = temp_max)) +
+      geom_ribbon(aes(ymin = temp_min, ymax = temp_max), alpha = 0.4) +
+      scale_y_continuous(
+        labels = scales::unit_format(unit = '°C')
+      ) +
+      scale_x_date(
+        date_breaks = "1 day",
+        expand = c(0,0),
+        date_labels = "%d-%m-%y") +
+      labs(y = "Temperature [min, max]") +
+      theme_minimal(base_size = 18) +
+      guides(linetype = "none", fill = "none") +
       theme(
         panel.grid.minor.x = element_blank(),
         axis.line.y = element_blank(),
@@ -280,31 +362,130 @@ server <- function(input, output, session) {
     input$county
     input$prev_ward
     input$next_ward}, {
-    req(input$county != "ALL")
-   #
-    leafletProxy("map") |>
-      removeShape(layerId = "selected") |>
-      clearMarkers() |>
-      addPolygons(
-        stroke = TRUE, weight = 2, color = "red",
-        fill = 'blue', opacity = 1,
-        data = ward_layer(),
-        layerId = "selected"
-      )
+      req(input$county != "ALL")
+      #
+      leafletProxy("map") |>
+        removeShape(layerId = "selected") |>
+        clearMarkers() |>
+        addPolygons(
+          stroke = TRUE, weight = 2, color = "red",
+          fill = 'blue', opacity = 1,
+          data = ward_layer(),
+          layerId = "selected"
+        )
     })
   #
-  output$weather_table <- DT::renderDT({
-    #
-    ward_data() |>
-      column_to_rownames(var = 'date') |>
-      t() |>
-      datatable(
-        options = list(dom = 't', scrollX = TRUE),
-        width = '100%', height = '100%' #table remains in container
-      ) |>
-      DT::formatRound(columns = 1:15,2) |>
-      DT::formatStyle(0:25, backgroundColor = "white", opacity = 1)
+  # output$weather_table <- DT::renderDT({
+  #   #
+  #   ward_data() |>
+  #     column_to_rownames(var = 'date') |>
+  #     t() |>
+  #     datatable(
+  #       options = list(dom = 't', scrollX = TRUE, ordering = F),
+  #       width = '100%', height = '100%' #table remains in container
+  #     ) |>
+  #     DT::formatRound(columns = 1:15,2) |>
+  #     DT::formatStyle(0:25, backgroundColor = "white", opacity = 1)
+  # })
+  #
+  output$gg_plot_all <- renderPlot({
+    all_years_rf() |> 
+      ggplot() + 
+      geom_col(
+        aes(x = year, y = rainfall, fill = year_type)
+      ) + 
+      theme_minimal(base_size = 18) +
+      scale_x_continuous(n.breaks = 30, expand = c(0,0)) +
+      scale_y_continuous(
+        labels = scales::unit_format(unit = 'mm'),
+      ) +
+      geom_text(aes(x = year, y = rainfall,
+                    label = rainfall),
+                vjust = -1) + 
+      labs(y = "Historic Yearly Rainfall") +
+      theme(
+        legend.position = 'top',
+        legend.title = element_blank(),
+        legend.direction = 'horizontal',
+        panel.grid.minor.x = element_blank(),
+        axis.line.y = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.title.y.right = element_text(angle = 90),
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(face = "bold", size = rel(0.7)),
+        axis.ticks = element_line()
+      )
   })
+    #
+    output$gg_plot_monthly <- renderPlot({
+      # print(monthly_rf_vals())
+      plot_data_m = monthly_rf_vals()$data$cy_data$monthly_rf_vals
+      plot_data_m$month_text = factor(
+        plot_data_m$month_text, 
+        levels = c("January", "February", "March", "April", 
+                   "May", "June", "July", "August", "September", 
+                   "October", "November", "December")
+        )
+      # print(plot_data_m)
+      plot_data_m |> 
+        
+        ggplot() + 
+        geom_col(
+          aes(x = month_text, y = rainfall)
+        ) + 
+        theme_minimal(base_size = 18) +
+        # scale_x_continuous(n.breaks = 30, expand = c(0,0)) +
+        scale_y_continuous(
+          labels = scales::unit_format(unit = 'mm'),
+        ) +
+        geom_text(aes(x = month_text, y = rainfall,
+                      label = rainfall),
+                  vjust = -1) + 
+        labs(y = "Monthly Rainfall Current Year") +
+        theme(
+          legend.position = 'top',
+          legend.title = element_blank(),
+          legend.direction = 'horizontal',
+          panel.grid.minor.x = element_blank(),
+          axis.line.y = element_blank(),
+          panel.grid.minor = element_blank(),
+          axis.title.y.right = element_text(angle = 90),
+          axis.title.x = element_blank(),
+          axis.text.x = element_text(face = "bold", size = rel(0.7)),
+          axis.ticks = element_line()
+        )
+      
+  })
+  #
+    output$gg_plot_monthly_hist <- renderPlot({
+      # print(monthly_rf_vals())
+      monthly_rf_vals()$data$py_data$hist_rf_vals |> 
+        ggplot() + 
+        geom_col(
+          aes(x = year, y = rainfall)
+        ) + 
+        theme_minimal(base_size = 18) +
+        scale_x_continuous(n.breaks = 30, expand = c(0,0)) +
+        scale_y_continuous(
+          labels = scales::unit_format(unit = 'mm'),
+        ) +
+        geom_text(aes(x = year, y = rainfall,
+                      label = rainfall),
+                  vjust = -1) + 
+        labs(y = "Historic Monthly Rainfall") +
+        theme(
+          legend.position = 'top',
+          legend.title = element_blank(),
+          legend.direction = 'horizontal',
+          panel.grid.minor.x = element_blank(),
+          axis.line.y = element_blank(),
+          panel.grid.minor = element_blank(),
+          axis.title.y.right = element_text(angle = 90),
+          axis.title.x = element_blank(),
+          axis.text.x = element_text(face = "bold", size = rel(0.7)),
+          axis.ticks = element_line()
+        )
+    })
   
 }
 
