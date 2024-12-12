@@ -12,7 +12,7 @@ clean_col_names <- function(data, index, ...){
   names(data)[index] <- janitor::make_clean_names(names(data)[index], ...)
   data
 }
-key_health_metrics <- read_csv("KeyHealthMetrics.csv") |>
+key_health_metrics <- read_csv("data/KeyHealthMetrics.csv") |>
   # clean first 3 colnames
   clean_col_names(1:3)
 #'
@@ -99,10 +99,27 @@ ui <- fluidPage(
         fluidRow(
           plotOutput(outputId = 'data_plot_example', 
                      height = '650px', width = '90%')),
-        br()
+        br(),
         # fluidRow(
         #   dataTableOutput(outputId = 'data_table_example')),
         # br()
+        fluidRow(
+          column(
+            width = 12, 
+            downloadButton(outputId = "download_image", label = "Download Image")
+          )
+        ),
+        div(
+          class = "footer",
+          style='height:50px;background:gray54;margin-top:auto;margin-bottom:auto;
+                    text-align:center;',
+          HTML(
+            '<footer class="footer">
+              Copyright &copy; 2024 &nbsp;
+              Github Account: <a href="https://github.com/akhapwoyaco"
+              target="_blank">akhapwoyaco</a>
+              </footer>'
+          ))
       )
     )
   )
@@ -172,7 +189,7 @@ server <- function(input, output, session) {
       )
   })
   #' 
-  output$data_plot_example <- renderPlot({
+  ggplot_out <- reactive({
     req(final_plot_data())
     final_plot_data() |> 
       ggplot(aes(x = Date, y = values)) + 
@@ -190,6 +207,30 @@ server <- function(input, output, session) {
       )
   })
   #
+output$data_plot_example <- renderPlot({
+    ggplot_out()
+  })
+  
+  # download plot via handler
+  output$download_image <- downloadHandler(
+    filename = function(){
+      # supply state names and paste on filetype
+      paste(
+        paste0(
+          input$county_input, 
+          input$health_grouping_input, 
+          input$data_grouping_name_input,
+          collapse = '_'),
+        '.jpeg', sep = ''
+      )
+    },
+    content = function(file){
+      ggsave(
+        plot = ggplot_out(), filename = file, 
+        width = 30, height = 25, units = "cm", dpi = 450
+      )
+    }
+  )
   # output$data_table_example <- renderDT({
   #   final_plot_data()
   # })
