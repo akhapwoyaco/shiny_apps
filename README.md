@@ -20,3 +20,7 @@ Weather Data
 ## [World Bank Data Visuals](./world_bank)
 
 + Getting Data
+
+## Health Metrics
+
+Health Metrics from [CEMA](https://cema.africa/kenyahealthdatatrends)
