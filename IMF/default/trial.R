@@ -45,7 +45,6 @@ server <- function(input, output, session) {
   
   output$gg_plot_rain <- renderPlot({
     # print(plot_dataset())
-    print(1)
     plot_dataset() |> 
       ggplot() + 
       geom_line(aes(x = year, y = value, color = indicator_name)) +
