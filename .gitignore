@@ -8,7 +8,6 @@
 *.zip
 **/blabla/
 **/Kenya_Data/
-*.R
 **/R/
 **/RFILES/
 *.tff
