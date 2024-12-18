@@ -16,11 +16,18 @@ Weather Data
 -   Historical Monthly Rainfall
 -   Historical Yearly Rainfall
 
-
 ## [World Bank Data Visuals](./world_bank)
 
-+ Getting Data
+-   Getting Data
 
-## Health Metrics
+## [Health Metrics](./health_metrics)
 
 Health Metrics from [CEMA](https://cema.africa/kenyahealthdatatrends)
+
+## World Bank
+
+-   [Global Ease of Doing Business](world_bank/Global_Ease_Of_Doing_Business)
+
+## IMF
+
+-   [DEFAULT_INTEGRATION_IMF](IMF/default)
