@@ -7,6 +7,9 @@ library(ggplot2)
 library(tidyr)
 library(DT)
 #
+
+# TODO
+# 
 #'clean colnames 
 clean_col_names <- function(data, index, ...){
   names(data)[index] <- janitor::make_clean_names(names(data)[index], ...)
@@ -30,184 +33,228 @@ data_grouping_name <- unique(key_health_metrics$data)
 #'
 #'
 ui <- fluidPage(
-  theme = bs_theme(
-    bg = "#101010", 
-    fg = "#FDF7F7", 
-    primary = "#ED79F9", 
-    base_font = font_google("Prompt"),
-    code_font = font_google("JetBrains Mono")
-  ),
-  #' TAB 1
-  tabsetPanel(
-    id = 'tabs',
-    tabPanel(
-      title = "Introduction",
-      fluidPage(
-        br(),
-        br(),
-        helpText(
-          tags$h4('Data Acquisition:'),
-          'The data was acquired from the Center for Epidemiological Modelling and Analsyis:', 
-          tags$a("Key Health Metrics", 
-                 href = "https://cema.africa/kenyahealthdatatrends"),
-          tags$br()  ),
-        br(),
-        br(),
-        helpText(
-          'The analysis is guided by the desire to learn the R 
-              programming language, statistical data analysis 
-              and master shiny apps.',
-          paste0(
-            'The KeyHealthMetrics data contains ', '1', 
-            ' observations, and ', '1', ' features on ....')),
-        br(),
-        br(),
-        helpText(
-          # include the html for lista and bold text
-          tags$h4('Data:'),
-          tags$li(
-            "Selection is made by the radio buttons on top right box for associations 
-            desired based on the publisher."), 
-          tags$li("Select Inputs define the features to get 
-            associations by"),
-          tags$h4("Plots: "),
-          tags$li(
-            'Add Resource for Mosaic Plot Interpretation and Download Button Functionality')
-        )
+  tags$head(
+    # Note the wrapping of the string in HTML()
+    tags$style(HTML("
+    @import url('https://fonts.cdnfonts.com/css/jetbrains-mono-2');
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: black;
+      color: white;
+      height: 100vh;
+      line-height: 2.20rem;
+    }
+    h2 {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: calc(2* var(--line-height));
+        text-transform: uppercase;
+        text-align: center;
+        left: 0px;
+        right: 0px;
+        background-color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center
+        
+    }
+    label {
+      font-size: 2rem;
+      font-weight: 700;
+        
+        display: flex;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+        justify-content: center;
+    }
+    .row {
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      
+    }
+    #county_input, #health_grouping_input, #data_grouping_name_input, #download_image {
+      font-size: 2rem;
+      font-weight: 700;
+      
+      background-color: black;
+      border: 0.5px solid #fff;
+      padding: 6px 12px;
+      display: inline-block;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      box-sizing: border-box;
+      box-shadow: none;
+      border-radius: 0px;
+      color: white;
+
+    }
+    select {
+      text-overflow: ellipses;
+    }
+    "))),
+  titlePanel("Health Metrics"),
+  fluidPage(
+    fluidRow(
+      style = "display: flex; flex-wrap:nowrap; gap: 1ch; width: calc(round(down, 100%,(1ch* var(--grid-cells)) -(1ch* var(--grid-cells) - 1))); margin-bottom: var(--line-height);",
+      column(4,
+             selectInput(
+               inputId = 'county_input', 
+               label = 'County', selectize = F,
+               choices = county_name)),
+      column(4, 
+             uiOutput('health_grouping_input_o')
+      ),
+      column(4,
+             uiOutput('data_grouping_name_input_o')
       )
     ),
-    tabPanel(
-      title = "Key Health Metrics",
-      fluidPage(
-        fluidRow(
-          column(4,
-                 selectInput(
-                   inputId = 'county_input', 
-                   label = 'County', 
-                   choices = county_name)),
-          column(4,
-                 selectizeInput(
-                   inputId = 'health_grouping_input', 
-                   label = 'Grouping', 
-                   choices = NULL)),
-          column(4,
-                 selectizeInput(
-                   inputId = 'data_grouping_name_input', 
-                   label = 'Data', 
-                   choices = NULL
-                 ))),
-        fluidRow(
-          plotOutput(outputId = 'data_plot_example', 
-                     height = '650px', width = '90%')),
-        br(),
-        # fluidRow(
-        #   dataTableOutput(outputId = 'data_table_example')),
-        # br()
-        fluidRow(
-          column(
-            width = 12, 
-            downloadButton(outputId = "download_image", label = "Download Image")
-          )
-        ),
-        div(
-          class = "footer",
-          style='height:50px;background:gray54;margin-top:auto;margin-bottom:auto;
+    br(),
+    fluidRow(
+      plotOutput(outputId = 'data_plot_example', 
+                 height = '650px', width = '90%')),
+    br(),
+    HTML(
+      '<p>The full source code is here: <a href = "https://github.com/akhapwoyaco/shiny_apps/blob/main/weather_app/app.R" 
+      target="_blank">https://github.com/akhapwoyaco/shiny_apps/blob/main/weather_app/</a>
+      </a>
+      </p>
+      <p>Inspiration: <a href = "https://owickstrom.github.io/the-monospace-web/#introduction"
+      target="_blank">The Monospace Web/</a>
+      </a>
+      </p>
+      '
+    ),
+    br(),
+    div(
+      style = "gap: 1ch; display: flex;
+      align-items: center;
+      justify-content: center; width: calc(round(down, 100%,(1ch* var(--grid-cells)) -(1ch* var(--grid-cells) - 1))); margin-bottom: var(--line-height);",
+      downloadButton(outputId = "download_image", label = "Download Image")
+    ),
+    br(),
+    br(),
+    div(
+      class = "footer",
+      style='height:50px;background:gray54;margin-top:auto;margin-bottom:auto;
                     text-align:center;',
-          HTML(
-            '<footer class="footer">
+      HTML(
+        '<footer class="footer">
               Copyright &copy; 2024 &nbsp;
               Github Account: <a href="https://github.com/akhapwoyaco"
               target="_blank">akhapwoyaco</a>
               </footer>'
-          ))
-      )
-    )
+      ))
   )
-)  
+)
+
 
 server <- function(input, output, session) {
   #' We have the county name, now get data on county
   county_data <- reactive({
     key_health_metrics |>
       filter(
-        organisation_unit == input$county_input) |>
+        organisation_unit %in% input$county_input) |>
       select(!(organisation_unit))
   })
   #' get unique groupings for grouping and update selector
-  observeEvent(input$county_input,{
-    req(input$county_input)
-    #
-    grouping_unique <- county_data() |>
-      distinct(grouping) |> pull()
-    # print(grouping_unique)
-    updateSelectizeInput(
-      session = session,
-      inputId = 'health_grouping_input',
-      choices = c(grouping_unique), 
-      server = TRUE)
-    #
-  })
+  output$health_grouping_input_o <- renderUI(
+    {req(input$county_input)
+      #
+      grouping_unique <- county_data() |>
+        distinct(grouping) |> pull()
+      selectInput(
+        label = 'Grouping', selectize = F,
+        inputId = 'health_grouping_input',
+        choices = c(grouping_unique))
+      #
+    })
   #' subset grouping from county data
   group_data <- reactive({
-    req(input$health_grouping_input)
+    req(input$county_input, input$health_grouping_input)
     county_data() |>
       filter(
-        grouping == input$health_grouping_input) |>
+        grouping %in% input$health_grouping_input) |>
       select(!(grouping))
   })
   #' Observe the grouping input and with it get distinct data levels
-  #' and update selector
-  observeEvent(input$health_grouping_input, {
-    req(input$health_grouping_input)
-    req(group_data())
-    data_unique <- group_data() |>
-      distinct(data) |> pull()
-    
-    updateSelectizeInput(
-      session = session, inputId = 'data_grouping_name_input',
-      choices = c(data_unique), 
-      server = T)
-  })
+  #' and update selector 
+  output$data_grouping_name_input_o <- renderUI(
+    {
+      req(input$county_input, input$health_grouping_input)
+      req(group_data())
+      data_unique <- group_data() |>
+        distinct(data) |> pull()
+      
+      selectInput( 
+        label = 'Data', selectize = F,
+        inputId = 'data_grouping_name_input',
+        choices = c(data_unique))
+    })
   #' 
   #' subset data 
   group_county_data <- reactive({
     req(input$data_grouping_name_input)
     group_data() |>
-      filter(data == input$data_grouping_name_input) |>
+      filter(data %in% input$data_grouping_name_input) |>
       select(!(data))
   })
   #'
   final_plot_data <- reactive({
-    # View(group_county_data())
+    # ensure data is well filtered before getting here
+    validate(
+      need(nrow(group_county_data()) > 0, message = F)
+    )
     group_county_data() |>
       pivot_longer(
         cols = everything(),
         names_to = 'Date', values_to = 'values'
+      ) |> drop_na(values) |>
+      mutate(
+        Date = lubridate::my(Date)
       ) |>
       mutate(
-        Date = as.Date(paste('1', Date, sep = ' '), '%d %B %Y')
-      )
+        year_s = lubridate::year(Date)
+      ) 
   })
   #' 
   ggplot_out <- reactive({
-    req(final_plot_data())
+    req(input$data_grouping_name_input)
     final_plot_data() |> 
       ggplot(aes(x = Date, y = values)) + 
       geom_line() + geom_point() + 
-      scale_x_date(date_labels = '%b', date_breaks = 'month') +  
-      facet_grid(~year(Date), space = 'free_x', 
-                 scales = 'free_x', switch = 'x') + 
+      scale_x_date(date_labels = '%m', date_breaks = 'month') +  
+      scale_y_continuous(labels = scales::label_comma()) +
+      labs(
+        title = paste(
+          input$county_input, ": ", gsub(pattern = "\\d+-", "",input$health_grouping_input),
+          " ", 
+          sep = ''),
+        subtitle = input$data_grouping_name_input, 
+        caption = 
+          "Center for Epidemiological Modelling and Analsyis: https://cema.africa/kenyahealthdatatrends"
+      ) +
+      facet_grid(.~year_s, space = 'free_x',
+                 scales = 'free_x', switch = 'x'
+      ) +
       theme_bw() + 
       theme(
         strip.placement = 'outside',
         axis.title = element_blank(),
-        axis.text.x = element_text(face = 'bold'),
-        axis.text.y = element_text(face = 'bold', angle = 90, hjust = 0.5),
-        panel.spacing = unit(0, 'cm')
+        axis.text.x = element_text(face = 'bold', size = rel(1.2)),
+        axis.text.y = element_text(face = 'bold', size = rel(1.2), angle = 90, hjust = 0.5),
+        panel.spacing = unit(0, 'cm'), 
+        plot.title = element_text(hjust = 0.5, face = 'bold', size = rel(1.5)),
+        plot.subtitle = element_text(hjust = 0.5, face = 'bold', size = rel(1.2)),
+        plot.caption = element_text(hjust = 0.5, face = 'bold', size = rel(1.2))
       )
   })
   #
-output$data_plot_example <- renderPlot({
+  output$data_plot_example <- renderPlot({
     ggplot_out()
   })
   
@@ -227,7 +274,7 @@ output$data_plot_example <- renderPlot({
     content = function(file){
       ggsave(
         plot = ggplot_out(), filename = file, 
-        width = 30, height = 25, units = "cm", dpi = 450
+        width = 35, height = 25, units = "cm", dpi = 450
       )
     }
   )

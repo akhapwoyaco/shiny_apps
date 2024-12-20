@@ -22,7 +22,11 @@ Weather Data
 
 ## [Health Metrics](./health_metrics)
 
-Health Metrics from [CEMA](https://cema.africa/kenyahealthdatatrends)
+- Data Health Metrics from [CEMA](https://cema.africa/kenyahealthdatatrends)
+
+- Inspired by [The Monospace Web](https://owickstrom.github.io/the-monospace-web/#introduction)
+
+![health_png](./health_metrics/health_png.png)
 
 ## World Bank
 
