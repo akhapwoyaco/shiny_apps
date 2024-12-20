@@ -236,7 +236,7 @@ server <- function(input, output, session) {
           sep = ''),
         subtitle = input$data_grouping_name_input, 
         caption = 
-          "Center for Epidemiological Modelling and Analsyis: https://cema.africa/kenyahealthdatatrends"
+          "Center for Epidemiological Modelling and Analsyis: https://cema.africa/kenyahealthdatatrends\nhttps://github.com/akhapwoyaco"
       ) +
       facet_grid(.~year_s, space = 'free_x',
                  scales = 'free_x', switch = 'x'
