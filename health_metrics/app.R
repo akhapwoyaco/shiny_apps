@@ -77,6 +77,12 @@ ui <- fluidPage(
       
     }
     #county_input, #health_grouping_input, #data_grouping_name_input, #download_image {
+       background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      
       font-size: 2rem;
       font-weight: 700;
       
@@ -93,24 +99,24 @@ ui <- fluidPage(
       color: white;
 
     }
-    select {
-      text-overflow: ellipses;
-    }
     "))),
   titlePanel("Health Metrics"),
   fluidPage(
     fluidRow(
-      style = "display: flex; flex-wrap:nowrap; gap: 1ch; width: calc(round(down, 100%,(1ch* var(--grid-cells)) -(1ch* var(--grid-cells) - 1))); margin-bottom: var(--line-height);",
+      #style = "display: flex; flex-wrap:nowrap; gap: 1ch; width: calc(round(down, 100%,(1ch* var(--grid-cells)) -(1ch* var(--grid-cells) - 1))); margin-bottom: var(--line-height);",
       column(4,
              selectInput(
                inputId = 'county_input', 
                label = 'County', selectize = F,
-               choices = county_name)),
+               choices = county_name),
+             style="margin: 0 auto;display: block;"),
       column(4, 
-             uiOutput('health_grouping_input_o')
+             uiOutput('health_grouping_input_o'),
+             style="margin: 0 auto;display: block;"
       ),
       column(4,
-             uiOutput('data_grouping_name_input_o')
+             uiOutput('data_grouping_name_input_o'),
+             style="margin: 0 auto;display: block;" # fixes and ensure the dropdown is centred
       )
     ),
     br(),
