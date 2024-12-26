@@ -40,7 +40,7 @@ editor_options:
 | ke_tree-plantations vTree plantations in Kenya. |  |
 | ke_woodlots-in-cropland | Percent woodlots in sampled cropland in central and western Kenya in 1997. |
 
-[AGRICULTURE PLOT](./R/Agriculture/AGRICULTURE_PLOT.png)
+![AGRICULTURE PLOT](./R/Agriculture/AGRICULTURE_PLOT.png)
 
 ### Land cover & land form
 
@@ -70,8 +70,14 @@ editor_options:
 |   ke_protected-areas.zip   |          Protected areas in Kenya.           |
 |     ke_waterbodies.zip     |            Water bodies in Kenya.            |
 
-[ke_district_boundaries_plot](./R/Base_Data/ke_district_boundaries_plot.png) [ke_major_towns_plot](./R/Base_Data/ke_major_towns_plot.png) [ke_key_airfields_plot](./R/Base_Data/ke_key_airfields_plot.png) [ke_protected_areas_plot](./R/Base_Data/ke_protected_areas_plot.png) [ke_major_rivers_plot](./R/Base_Data/ke_major_rivers_plot.png) [ke_waterbodies_plot](./R/Base_Data/ke_waterbodies_plot.png) [ke_major_roads_plot](./R/Base_Data/ke_major_roads_plot.png)\
-[water_bodies](./R/Base_Data/water_bodies.png)
+![ke_district_boundaries_plot](./R/Base_Data/ke_district_boundaries_plot.png) 
+![ke_major_towns_plot](./R/Base_Data/ke_major_towns_plot.png) 
+![ke_key_airfields_plot](./R/Base_Data/ke_key_airfields_plot.png) 
+![ke_protected_areas_plot](./R/Base_Data/ke_protected_areas_plot.png) 
+![ke_major_rivers_plot](./R/Base_Data/ke_major_rivers_plot.png) 
+![ke_waterbodies_plot](./R/Base_Data/ke_waterbodies_plot.png) 
+![ke_major_roads_plot](./R/Base_Data/ke_major_roads_plot.png)
+![water_bodies](./R/Base_Data/water_bodies.png)
 
 ### Elevation
 
