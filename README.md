@@ -36,7 +36,10 @@ Weather Data
 
 -   [DEFAULT_INTEGRATION_IMF](IMF/default)
 
+## [Hearing Loss](./hearing_loss)
 
+- [Hearing loss Linear Regression: Prediction of Hearing Frequencies based on Age](./hearing_loss/appV2.R)
+- [Hearing Loss Classification: Classification according to diagnosis](./hearing_loss/appV3.R)
 
 # TODO
 

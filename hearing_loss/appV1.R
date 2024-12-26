@@ -11,7 +11,33 @@ HearingLoss <- read_delim(
   select(Age, starts_with("HearingLoss"))
 
 ui <- fluidPage(
-  
+  tags$head(
+    # Note the wrapping of the string in HTML()
+    tags$style(HTML("
+    @import url('https://fonts.cdnfonts.com/css/jetbrains-mono-2');
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      
+      
+      height: 100vh;
+      line-height: 2.20rem;
+    }
+    h2 {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: calc(2* var(--line-height));
+        text-transform: uppercase;
+        text-align: center;
+        left: 0px;
+        right: 0px;
+        
+        display: flex;
+        align-items: center;
+        justify-content: center
+        
+    }
+    "))),
+  titlePanel("Hearing Loss Frequencies"),
   fluidRow(
     column(6,
            selectInput(
