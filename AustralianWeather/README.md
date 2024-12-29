@@ -33,4 +33,6 @@
 
 ### Shiny App
 
+- Of Interest is to get the general time series flow of the data, the summaries and when overally there was maximum and minimum experience of the variables.
 ![Australian Weather](screen_app.png)
+![Australian Weather 2](screen_app2.png)
