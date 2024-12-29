@@ -77,7 +77,7 @@ australian_weather_202412281334 |>
 
 #### Correlation
 
-```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=15, fig.height=10, fig.cap='Correlation Plot All Data'} 
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=10, fig.height=10, fig.cap='Correlation Plot All Data'} 
 # Correlation
 cor_data1 <- australian_weather_202412281334 |> 
   select(where(is.numeric)) |> 
@@ -113,7 +113,7 @@ australian_plot_data() |>
 
 #### Correlation
 
-```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=15, fig.height=10, fig.cap='Correlation Plot Location'} 
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=10, fig.height=10, fig.cap='Correlation Plot Location'} 
 # Correlation
 cor_data2 <- australian_plot_data()  |> 
   select(where(is.numeric)) #|> 
@@ -136,7 +136,7 @@ corr_plot2
 ## Exploratory Analysis
 ### Temperature: Where do we experience maximum and minimum temperatures?
 
-```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=15, fig.height=10, fig.cap='Temperature Plot Location'} 
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=10, fig.height=10, fig.cap='Temperature Plot Location'} 
 data_geom_text_t = data.frame(
   date_min_temp = subset(
     australian_temperature(),
@@ -164,7 +164,7 @@ The minimum and maximum temperatures along with the days they were experienced, 
 \newpage
 ### Humidity: Where and when do we experience maximum and minimum humidity levels?
 
-```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=15, fig.height=10, fig.cap='Humidity Plot Location'} 
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=10, fig.height=10, fig.cap='Humidity Plot Location'} 
 data_geom_text_h = data.frame(
   date_min_humidity = subset(
     australian_humidity(),
@@ -192,7 +192,7 @@ The minimum and maximum humidity along with the days they were experienced, ie `
 \newpage
 ### Wind Speed: Where and when do we experience maximum and minimum wind speeds?
 
-```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=15, fig.height=10, fig.cap='Maximum Wind Speed Plot Location'} 
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=10, fig.height=10, fig.cap='Maximum Wind Speed Plot Location'} 
 data_geom_text_w = data.frame(
   date_min_wind = subset(
     australian_wind(), 
@@ -221,7 +221,7 @@ The minimum and maximum of the maximum `WindGust` speeds along with the days the
 \newpage
 ### Pressure: Where and when do we experience maximum and minimum pressure?
 
-```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=15, fig.height=8, fig.cap='Pressure: 9am and 3pm'}
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=10, fig.height=8, fig.cap='Pressure: 9am and 3pm'}
 data_geom_text_p = data.frame(
   date_min_pressure = subset(
     australian_pressure(), 
