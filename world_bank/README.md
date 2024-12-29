@@ -9,7 +9,7 @@ Data Source: <https://www.kaggle.com/datasets/saurabhbadole/global-ease-of-doing
 ### Dataset Features
 
 | Column Name | Description |
-|:--:|:--:|
+|:----------------------------------:|:----------------------------------:|
 | Country Name | The name of the country or region. |
 | Country Code | A unique code representing the country. |
 | Series Name | The name of the indicator being tracked (e.g., costs, time, regulatory measures). |

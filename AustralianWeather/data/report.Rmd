@@ -1,0 +1,247 @@
+---
+title: "Australia Daily Weather Observation"
+subtitle: "`r paste(input$terri_tory, input$loca_tion)`"
+author: "`r paste('CWitizen of ', input$terri_tory, input$loca_tion)`"
+date: "`r Sys.Date()`"
+urlcolor: blue
+mainfont: Arial
+fontsize: 10pt
+spacing: single
+---
+\newpage
+# Introduction
+
+Australia Daily Weather Observations list observations of a number of weather elements each day for a month. Included are daily minimum and maximum temperature, rainfall, strongest wind gust, evaporation, and sunshine, together with values at 9am and 3pm of temperature, humidity, wind, cloud and pressure provided by the Australian Bureau of Meteorology.
+
+Data is scrapped from [Australian Bureau of Meteorology](http://www.bom.gov.au/climate/dwo/index.shtml) and covers period `r  min(australian_weather_202412281334$date)` to `r max(australian_weather_202412281334$date)`. The data acquisition was part of a web scrapping project, [webscrapping Australian Weather data](https://github.com/akhapwoyaco/WEBSCRAPPING/tree/main/AustralianWeather) and subsequent building of an R Shiny App [Daily Weather Observation](https://01940e82-7881-ac23-953c-68da09cea0f0.share.connect.posit.cloud/).
+
+# Data
+
+## Data Description
+
+| Heading |   | Meaning | Units |
+|:-----------------|:------------------|:-----------------|------------------|
+| Date |  | Day of the month |  |
+| Day |  | Day of the week | first two letters |
+| Temps | Min | Minimum temperature in the 24 hours to 9am. Sometimes only known to the nearest whole degree. | degrees Celsius |
+|  | Max | Maximum temperature in the 24 hours from 9am. Sometimes only known to the nearest whole degree. | degrees Celsius |
+| Rain |  | Precipitation (rainfall) in the 24 hours to 9am. Sometimes only known to the nearest whole millimetre. | millimetres |
+| Evap |  | "Class A" pan evaporation in the 24 hours to 9am | millimetres |
+| Sun |  | Bright sunshine in the 24 hours to midnight | hours |
+| Max wind gust | Dirn | Direction of strongest gust in the 24 hours to midnight | 16 compass points |
+|  | Spd | Speed of strongest wind gust in the 24 hours to midnight | kilometres per hour |
+|  | Time | Time of strongest wind gust | local time hh:mm |
+| 9 am | Temp | Temperature at 9 am degrees | Celsius |
+|  | RH | Relative humidity at 9 am | percent |
+|  | Cld | Fraction of sky obscured by cloud at 9 am | eighths |
+|  | Dirn | Wind direction averaged over 10 minutes prior to 9 am | compass points |
+|  | Spd | Wind speed averaged over 10 minutes prior to 9 am | kilometres per hour |
+|  | MSLP | Atmospheric pressure reduced to mean sea level at 9 am | hectopascals |
+| 3 pm | Temp | Temperature at 3 pm degrees | Celsius |
+|  | RH | Relative humidity at 3 pm | percent |
+|  | Cld | Fraction of sky obscured by cloud at 3 pm | eighths |
+|  | Dirn | Wind direction averaged over 10 minutes prior to 3 pm compass | points |
+|  | Spd | Wind speed averaged over 10 minutes prior to 3 pm kilometres per | hour |
+|  | MSLP | Atmospheric pressure reduced to mean sea level at 3 pm | hectopascals |
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+```
+
+\newpage
+## Territories and Locations Covered
+
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines'} 
+australian_weather_202412281334 |> 
+  select(territory, location) |> distinct() |> 
+  group_by(territory) |> 
+  summarise(locations = paste(location, collapse = ", ")) |>
+  pander::pander(split.table=Inf)
+# knitr::kable(caption = "Territories And Locations", format = 'latex') 
+```
+
+\newpage
+## Summary Statistics
+
+### All Data Numeric Variables
+
+#### Summary Statistics
+
+```{r all_data_summary,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines'}
+australian_weather_202412281334 |> 
+  select(where(is.numeric)) |> 
+  select(-yyyymm) |>
+  describe(skew = F, ranges = !F, IQR = !T) |>
+  knitr::kable(caption = "Australian Data Summary Statistics", digits = 1)
+```
+
+#### Correlation
+
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=15, fig.height=10, fig.cap='Correlation Plot All Data'} 
+# Correlation
+cor_data1 <- australian_weather_202412281334 |> 
+  select(where(is.numeric)) |> 
+  select(-yyyymm) |>
+  drop_na()
+#
+corr_mat1 <- round(cor(cor_data1),1) # find correlation and round values
+cor_mat_melt1 <- melt(corr_mat1) #Data to long format
+corr_plot1 <- ggplot(cor_mat_melt1, aes(x = X1, y = X2, fill = value)) +
+  geom_tile() + scale_fill_continuous(type = "viridis") +
+  geom_text(aes(x = X1, y = X2, label = value)) + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 90,face = "bold"),
+        axis.title = element_blank(),
+        legend.position = 'none',
+        axis.text.y = element_text(size = 10,face = "bold"))
+corr_plot1
+```
+
+\newpage
+### Summary of selected Territory and Location
+#### Summary Statistics
+
+```{r locality_summary,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines'}
+australian_plot_data() |> 
+  select(where(is.numeric)) |> 
+  describe(skew = F, ranges = !F, IQR = !T) |>
+  knitr::kable(
+    caption = paste("Data Summary Statistics: ",
+                    input$terri_tory, ", ", input$loca_tion, sep = ''), 
+    digits = 2)
+```
+
+#### Correlation
+
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=15, fig.height=10, fig.cap='Correlation Plot Location'} 
+# Correlation
+cor_data2 <- australian_plot_data()  |> 
+  select(where(is.numeric)) #|> 
+# drop_na()
+#
+corr_mat2 <- round(cor(cor_data2),1) # find correlation and round values
+cor_mat_melt2 <- melt(corr_mat2) #Data to long format
+corr_plot2 <- ggplot(cor_mat_melt2, aes(x = X1, y = X2, fill = value)) +
+  geom_tile() + scale_fill_continuous(type = "viridis") +
+  geom_text(aes(x = X1, y = X2, label = value)) + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 90,face = "bold"),
+        axis.title = element_blank(),
+        legend.position = 'none',
+        axis.text.y = element_text(size = 10,face = "bold"))
+corr_plot2
+```
+
+\newpage
+## Exploratory Analysis
+### Temperature: Where do we experience maximum and minimum temperatures?
+
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=15, fig.height=10, fig.cap='Temperature Plot Location'} 
+data_geom_text_t = data.frame(
+  date_min_temp = subset(
+    australian_temperature(),
+    australian_temperature()$Value == min(australian_temperature()$Value,
+                                          na.rm = T))$date[1]
+  ,point_min_temp = subset(
+    australian_temperature(),
+    australian_temperature()$Value == min(australian_temperature()$Value,
+                                          na.rm = T))$Value[1]
+  #
+  ,date_max_temp = subset(
+    australian_temperature(),
+    australian_temperature()$Value == max(australian_temperature()$Value,
+                                          na.rm = T))$date[1]
+  ,point_max_temp = subset(
+    australian_temperature(),
+    australian_temperature()$Value == max(australian_temperature()$Value,
+                                          na.rm = T))$Value[1]
+)
+temp_plot()
+```
+
+The minimum and maximum temperatures along with the days they were experienced, ie `r data_geom_text_t$point_min_temp` on `r data_geom_text_t$date_min_temp` and `r data_geom_text_t$point_max_temp` on `r data_geom_text_t$date_max_temp`.
+
+\newpage
+### Humidity: Where and when do we experience maximum and minimum humidity levels?
+
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=15, fig.height=10, fig.cap='Humidity Plot Location'} 
+data_geom_text_h = data.frame(
+  date_min_humidity = subset(
+    australian_humidity(),
+    australian_humidity()$Value == min(australian_humidity()$Value,
+                                       na.rm = T))$date[1]
+  ,point_min_humidity = subset(
+    australian_humidity(),
+    australian_humidity()$Value == min(australian_humidity()$Value,
+                                       na.rm = T))$Value[1]
+  #
+  ,date_max_humidity = subset(
+    australian_humidity(),
+    australian_humidity()$Value == max(australian_humidity()$Value,
+                                       na.rm = T))$date[1]
+  ,point_max_humidity = subset(
+    australian_humidity(),
+    australian_humidity()$Value == max(australian_humidity()$Value,
+                                       na.rm = T))$Value[1]
+)
+humid_plot()
+```
+
+The minimum and maximum humidity along with the days they were experienced, ie `r data_geom_text_h$point_min_humidity` on `r data_geom_text_h$date_min_humidity` and `r data_geom_text_h$point_max_humidity` on `r data_geom_text_h$date_max_humidity`.
+
+\newpage
+### Wind Speed: Where and when do we experience maximum and minimum wind speeds?
+
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=15, fig.height=10, fig.cap='Maximum Wind Speed Plot Location'} 
+data_geom_text_w = data.frame(
+  date_min_wind = subset(
+    australian_wind(), 
+    australian_wind()$Value == min(australian_wind()$Value,
+                                   na.rm = T))$date[1]
+  ,point_min_wind = subset(
+    australian_wind(), 
+    australian_wind()$Value == min(australian_wind()$Value, 
+                                   na.rm = T))$Value[1]
+  #
+  ,date_max_wind = subset(
+    australian_wind(), 
+    australian_wind()$Value == max(australian_wind()$Value, 
+                                   na.rm = T))$date[1]
+  ,point_max_wind = subset(
+    australian_wind(), 
+    australian_wind()$Value == max(australian_wind()$Value, 
+                                   na.rm = T))$Value[1]
+)
+wind_plot()
+```
+
+The minimum and maximum of the maximum `WindGust` speeds along with the days they were experienced, ie `r data_geom_text_w$point_min_wind` on `r data_geom_text_w$date_min_wind` and `r data_geom_text_w$point_max_wind` on `r data_geom_text_w$date_max_wind`.
+
+\newpage
+\newpage
+### Pressure: Where and when do we experience maximum and minimum pressure?
+
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=15, fig.height=8, fig.cap='Pressure: 9am and 3pm'}
+data_geom_text_p = data.frame(
+  date_min_pressure = subset(
+    australian_pressure(), 
+    australian_pressure()$Value == min(australian_pressure()$Value,
+                                       na.rm = T))$date[1]
+  ,point_min_pressure = subset(
+    australian_pressure(), 
+    australian_pressure()$Value == min(australian_pressure()$Value, 
+                                       na.rm = T))$Value[1]
+  #
+  ,date_max_pressure = subset(
+    australian_pressure(), 
+    australian_pressure()$Value == max(australian_pressure()$Value, 
+                                       na.rm = T))$date[1]
+  ,point_max_pressure = subset(
+    australian_pressure(), 
+    australian_pressure()$Value == max(australian_pressure()$Value, 
+                                       na.rm = T))$Value[1]
+)
+pressure_plot()
+```
+
+The minimum and maximum pressure along with the days they were experienced, ie `r data_geom_text_p$point_min_pressure` on `r data_geom_text_p$date_min_pressure` and `r data_geom_text_p$point_max_pressure` on `r data_geom_text_p$date_max_pressure`. There was no clear pattern for the humidity variable data.

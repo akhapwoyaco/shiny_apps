@@ -12,7 +12,7 @@
   "packages": {
     "DBI": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "DBI",
         "Title": "R Database Interface",
@@ -42,9 +42,32 @@
         "Built": "R 4.4.1; ; 2024-08-02 00:32:27 UTC; windows"
       }
     },
+    "GPArotation": {
+      "Source": "CRAN",
+      "Repository": null,
+      "description": {
+        "Package": "GPArotation",
+        "Version": "2024.3-1",
+        "Title": "Gradient Projection Factor Rotation",
+        "Authors@R": "c( \n\tperson(\"Coen\", \"Bernaards\", email = \"cab.gparotation@gmail.com\", role = c(\"aut\",\"cre\")),\n\tperson(\"Paul\", \"Gilbert\", email = \"pgilbert.ttv9z@ncf.ca\", role = \"aut\"),\n\tperson(\"Robert\", \"Jennrich\", role = \"aut\")\n\t)",
+        "Depends": "R (>= 2.0.0)",
+        "Description": "Gradient Projection Algorithms for Factor Rotation. \n    For details see ?GPArotation. When using this package, please cite:\n    Bernaards and Jennrich (2005) <doi:10.1177/0013164404272507>.\n    \"Gradient Projection Algorithms and Software \n    for Arbitrary Rotation Criteria in Factor Analysis\".",
+        "LazyData": "yes",
+        "Imports": "stats",
+        "License": "GPL (>= 2)",
+        "URL": "https://optimizer.r-forge.r-project.org/GPArotation_www/",
+        "NeedsCompilation": "no",
+        "Packaged": "2024-03-01 19:57:44 UTC; coen",
+        "Author": "Coen Bernaards [aut, cre],\n  Paul Gilbert [aut],\n  Robert Jennrich [aut]",
+        "Maintainer": "Coen Bernaards <cab.gparotation@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2024-03-02 00:12:35 UTC",
+        "Built": "R 4.4.0; ; 2024-04-23 00:28:26 UTC; windows"
+      }
+    },
     "MASS": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "MASS",
         "Priority": "recommended",
@@ -74,7 +97,7 @@
     },
     "Matrix": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "Matrix",
         "Version": "1.7-0",
@@ -108,7 +131,7 @@
     },
     "R6": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "R6",
         "Title": "Encapsulated Classes with Reference Semantics",
@@ -132,7 +155,7 @@
     },
     "RColorBrewer": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "RColorBrewer",
         "Version": "1.1-3",
@@ -153,7 +176,7 @@
     },
     "Rcpp": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "Rcpp",
         "Title": "Seamless R and C++ Integration",
@@ -181,7 +204,7 @@
     },
     "askpass": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "askpass",
         "Type": "Package",
@@ -209,7 +232,7 @@
     },
     "backports": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "backports",
         "Type": "Package",
@@ -236,7 +259,7 @@
     },
     "base64enc": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "base64enc",
         "Version": "0.1-3",
@@ -258,7 +281,7 @@
     },
     "bit": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "bit",
         "Type": "Package",
@@ -287,7 +310,7 @@
     },
     "bit64": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "bit64",
         "Type": "Package",
@@ -316,7 +339,7 @@
     },
     "blob": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "blob",
         "Title": "A Simple S3 Class for Representing Vectors of Binary Data\n('BLOBS')",
@@ -344,7 +367,7 @@
     },
     "broom": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "broom",
@@ -375,7 +398,7 @@
     },
     "bslib": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "bslib",
         "Title": "Custom 'Bootstrap' 'Sass' Themes for 'shiny' and 'rmarkdown'",
@@ -408,7 +431,7 @@
     },
     "cachem": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "cachem",
         "Version": "1.1.0",
@@ -436,7 +459,7 @@
     },
     "callr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "callr",
         "Title": "Call R from R",
@@ -465,7 +488,7 @@
     },
     "cellranger": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "cellranger",
         "Title": "Translate Spreadsheet Cell Ranges to Rows and Columns",
@@ -492,7 +515,7 @@
     },
     "cli": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "cli",
         "Title": "Helpers for Developing Command Line Interfaces",
@@ -521,7 +544,7 @@
     },
     "clipr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "clipr",
@@ -550,7 +573,7 @@
     },
     "colorspace": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "colorspace",
         "Version": "2.1-0",
@@ -580,7 +603,7 @@
     },
     "commonmark": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "commonmark",
         "Type": "Package",
@@ -607,7 +630,7 @@
     },
     "conflicted": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "conflicted",
         "Title": "An Alternative Conflict Resolution Strategy",
@@ -633,9 +656,37 @@
         "Built": "R 4.4.1; ; 2024-08-02 01:29:17 UTC; windows"
       }
     },
+    "cowplot": {
+      "Source": "CRAN",
+      "Repository": null,
+      "description": {
+        "Package": "cowplot",
+        "Title": "Streamlined Plot Theme and Plot Annotations for 'ggplot2'",
+        "Version": "1.1.3",
+        "Authors@R": "\n    person(\n      given = \"Claus O.\",\n      family = \"Wilke\",\n      role = c(\"aut\", \"cre\"),\n      email = \"wilke@austin.utexas.edu\",\n      comment = c(ORCID = \"0000-0002-7470-9261\")\n    )",
+        "Description": "\n    Provides various features that help with creating publication-quality figures\n    with 'ggplot2', such as a set of themes, functions to align plots and arrange\n    them into complex compound figures, and functions that make it easy to annotate\n    plots and or mix plots with images. The package was originally written for\n    internal use in the Wilke lab, hence the name (Claus O. Wilke's plot package).\n    It has also been used extensively in the book Fundamentals of Data\n    Visualization.",
+        "URL": "https://wilkelab.org/cowplot/",
+        "BugReports": "https://github.com/wilkelab/cowplot/issues",
+        "Depends": "R (>= 3.5.0)",
+        "Imports": "ggplot2 (>= 3.4.0), grid, gtable, grDevices, methods, rlang,\nscales",
+        "License": "GPL-2",
+        "Suggests": "Cairo, covr, dplyr, forcats, gridGraphics (>= 0.4-0), knitr,\nlattice, magick, maps, PASWR, patchwork, rmarkdown, ragg,\ntestthat (>= 1.0.0), tidyr, vdiffr (>= 0.3.0), VennDiagram",
+        "VignetteBuilder": "knitr",
+        "Collate": "'add_sub.R' 'align_plots.R' 'as_grob.R' 'as_gtable.R'\n'axis_canvas.R' 'cowplot.R' 'draw.R' 'get_plot_component.R'\n'get_axes.R' 'get_titles.R' 'get_legend.R' 'get_panel.R'\n'gtable.R' 'key_glyph.R' 'plot_grid.R' 'save.R'\n'set_null_device.R' 'setup.R' 'stamp.R' 'themes.R'\n'utils_ggplot2.R'",
+        "RoxygenNote": "7.2.3",
+        "Encoding": "UTF-8",
+        "NeedsCompilation": "no",
+        "Packaged": "2024-01-22 21:32:03 UTC; clauswilke",
+        "Author": "Claus O. Wilke [aut, cre] (<https://orcid.org/0000-0002-7470-9261>)",
+        "Maintainer": "Claus O. Wilke <wilke@austin.utexas.edu>",
+        "Repository": "CRAN",
+        "Date/Publication": "2024-01-22 23:22:51 UTC",
+        "Built": "R 4.4.1; ; 2024-10-10 02:40:10 UTC; windows"
+      }
+    },
     "cpp11": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "cpp11",
         "Title": "A C++11 Interface for R's C Interface",
@@ -664,7 +715,7 @@
     },
     "crayon": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "crayon",
         "Title": "Colored Terminal Output",
@@ -691,7 +742,7 @@
     },
     "curl": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "curl",
         "Type": "Package",
@@ -721,7 +772,7 @@
     },
     "data.table": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "data.table",
         "Version": "1.15.4",
@@ -748,7 +799,7 @@
     },
     "dbplyr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "dbplyr",
@@ -781,7 +832,7 @@
     },
     "digest": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "digest",
         "Author": "Dirk Eddelbuettel <edd@debian.org> with contributions\n by Antoine Lucas, Jarek Tuszynski, Henrik Bengtsson, Simon Urbanek,\n Mario Frasca, Bryan Lewis, Murray Stokely, Hannes Muehleisen,\n Duncan Murdoch, Jim Hester, Wush Wu, Qiang Kou, Thierry Onkelinx,\n Michel Lang, Viliam Simko, Kurt Hornik, Radford Neal, Kendon Bell,\n Matthew de Queljoe, Ion Suruceanu, Bill Denney, Dirk Schumacher,\n Winston Chang, Dean Attali, and Michael Chirico.",
@@ -807,7 +858,7 @@
     },
     "dplyr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "dplyr",
@@ -839,7 +890,7 @@
     },
     "dtplyr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "dtplyr",
         "Title": "Data Table Back-End for 'dplyr'",
@@ -868,7 +919,7 @@
     },
     "evaluate": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "evaluate",
@@ -896,7 +947,7 @@
     },
     "fansi": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "fansi",
         "Title": "ANSI Control Sequence Aware String Functions",
@@ -925,7 +976,7 @@
     },
     "farver": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "farver",
@@ -952,7 +1003,7 @@
     },
     "fastmap": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "fastmap",
         "Title": "Fast Data Structures",
@@ -977,7 +1028,7 @@
     },
     "fontawesome": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "fontawesome",
@@ -1006,7 +1057,7 @@
     },
     "forcats": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "forcats",
         "Title": "Tools for Working with Categorical Variables (Factors)",
@@ -1036,7 +1087,7 @@
     },
     "fs": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "fs",
         "Title": "Cross-Platform File System Operations Based on 'libuv'",
@@ -1070,7 +1121,7 @@
     },
     "gargle": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "gargle",
         "Title": "Utilities for Working with Google APIs",
@@ -1100,7 +1151,7 @@
     },
     "generics": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "generics",
         "Title": "Common S3 Generics not Provided by Base R Methods Related to\nModel Fitting",
@@ -1128,7 +1179,7 @@
     },
     "ggplot2": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "ggplot2",
         "Version": "3.5.1",
@@ -1160,7 +1211,7 @@
     },
     "ggrepel": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "ggrepel",
         "Version": "0.9.6",
@@ -1189,7 +1240,7 @@
     },
     "glue": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "glue",
         "Title": "Interpreted String Literals",
@@ -1220,7 +1271,7 @@
     },
     "googledrive": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "googledrive",
         "Title": "An Interface to Google Drive",
@@ -1250,7 +1301,7 @@
     },
     "googlesheets4": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "googlesheets4",
         "Title": "Access Google Sheets using the Sheets API V4",
@@ -1278,9 +1329,33 @@
         "Built": "R 4.4.1; ; 2024-08-02 02:03:31 UTC; windows"
       }
     },
+    "gridExtra": {
+      "Source": "CRAN",
+      "Repository": null,
+      "description": {
+        "Package": "gridExtra",
+        "Authors@R": "c(person(\"Baptiste\", \"Auguie\",\n    email = \"baptiste.auguie@gmail.com\",\n    role = c(\"aut\", \"cre\")), person(\"Anton\", \"Antonov\",\n    email = \"tonytonov@gmail.com\",\n    role = c(\"ctb\")))",
+        "License": "GPL (>= 2)",
+        "Title": "Miscellaneous Functions for \"Grid\" Graphics",
+        "Type": "Package",
+        "Description": "Provides a number of user-level functions to work with \"grid\"\n    graphics, notably to arrange multiple grid-based plots on a page, and draw\n    tables.",
+        "Version": "2.3",
+        "VignetteBuilder": "knitr",
+        "Imports": "gtable, grid, grDevices, graphics, utils",
+        "Suggests": "ggplot2, egg, lattice, knitr, testthat",
+        "RoxygenNote": "6.0.1",
+        "NeedsCompilation": "no",
+        "Packaged": "2017-09-08 22:52:09 UTC; baptiste",
+        "Author": "Baptiste Auguie [aut, cre],\n  Anton Antonov [ctb]",
+        "Maintainer": "Baptiste Auguie <baptiste.auguie@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2017-09-09 14:12:08 UTC",
+        "Built": "R 4.4.1; ; 2024-10-10 02:00:43 UTC; windows"
+      }
+    },
     "gtable": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "gtable",
         "Title": "Arrange 'Grobs' in Tables",
@@ -1309,7 +1384,7 @@
     },
     "haven": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "haven",
         "Title": "Import and Export 'SPSS', 'Stata' and 'SAS' Files",
@@ -1341,7 +1416,7 @@
     },
     "highr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "highr",
         "Type": "Package",
@@ -1369,7 +1444,7 @@
     },
     "hms": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "hms",
         "Title": "Pretty Time of Day",
@@ -1399,7 +1474,7 @@
     },
     "htmltools": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "htmltools",
@@ -1431,7 +1506,7 @@
     },
     "httpuv": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "httpuv",
@@ -1462,7 +1537,7 @@
     },
     "httr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "httr",
         "Title": "Tools for Working with URLs and HTTP",
@@ -1490,7 +1565,7 @@
     },
     "ids": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "ids",
         "Title": "Generate Random Identifiers",
@@ -1515,7 +1590,7 @@
     },
     "isoband": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "isoband",
         "Title": "Generate Isolines and Isobands from Regularly Spaced Elevation\nGrids",
@@ -1545,7 +1620,7 @@
     },
     "jquerylib": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "jquerylib",
         "Title": "Obtain 'jQuery' as an HTML Dependency Object",
@@ -1569,7 +1644,7 @@
     },
     "jsonlite": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "jsonlite",
         "Version": "1.8.9",
@@ -1596,7 +1671,7 @@
     },
     "knitr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "knitr",
         "Type": "Package",
@@ -1626,7 +1701,7 @@
     },
     "labeling": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "labeling",
         "Type": "Package",
@@ -1648,7 +1723,7 @@
     },
     "later": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "later",
         "Type": "Package",
@@ -1677,7 +1752,7 @@
     },
     "lattice": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "lattice",
         "Version": "0.22-6",
@@ -1707,7 +1782,7 @@
     },
     "lifecycle": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "lifecycle",
         "Title": "Manage the Life Cycle of your Package Functions",
@@ -1736,7 +1811,7 @@
     },
     "lubridate": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "lubridate",
@@ -1771,7 +1846,7 @@
     },
     "magrittr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "magrittr",
@@ -1801,7 +1876,7 @@
     },
     "memoise": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "memoise",
         "Title": "'Memoisation' of Functions",
@@ -1826,7 +1901,7 @@
     },
     "mgcv": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "mgcv",
         "Version": "1.9-1",
@@ -1851,7 +1926,7 @@
     },
     "mime": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "mime",
         "Type": "Package",
@@ -1875,9 +1950,32 @@
         "Archs": "x64"
       }
     },
+    "mnormt": {
+      "Source": "CRAN",
+      "Repository": null,
+      "description": {
+        "Package": "mnormt",
+        "Version": "2.1.1",
+        "Date": "2022-09-26",
+        "Title": "The Multivariate Normal and t Distributions, and Their Truncated\nVersions",
+        "Author": "Adelchi Azzalini [aut, cre],\n   Alan Genz [aut] (most Fortran code),\n   Alan Miller [ctb] (Fortran routine PHI),\n   Michael J. Wichura  [ctb] (Fortran routine PHINV),\n   G. W. Hill [ctb] (Fortran routine STDINV),\n   Yihong Ge [ctb] (Fortran routines BNVU and MVBVU).",
+        "Maintainer": "Adelchi Azzalini <adelchi.azzalini@unipd.it>",
+        "Depends": "R (>= 2.2.0)",
+        "Description": "Functions are provided for computing the density and the\n  distribution function of d-dimensional normal and \"t\" random variables,\n  possibly truncated (on one side or two sides),  and for generating random \n  vectors sampled from these distributions, except sampling from the truncated\n  \"t\". Moments of arbitrary order of a multivariate truncated normal are\n  computed, and converted to cumulants up to order 4. \n  Probabilities are computed via non-Monte Carlo methods; different routines \n  are used in the case d=1, d=2, d=3, d>3, if d denotes the dimensionality.",
+        "License": "GPL-2 | GPL-3",
+        "URL": "http://azzalini.stat.unipd.it/SW/Pkg-mnormt/",
+        "NeedsCompilation": "yes",
+        "Encoding": "UTF-8",
+        "Packaged": "2022-09-26 08:42:55 UTC; aa",
+        "Repository": "CRAN",
+        "Date/Publication": "2022-09-26 10:10:06 UTC",
+        "Built": "R 4.4.0; x86_64-w64-mingw32; 2024-04-23 00:24:53 UTC; windows",
+        "Archs": "x64"
+      }
+    },
     "modelr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "modelr",
         "Title": "Modelling Functions that Work with the Pipe",
@@ -1906,7 +2004,7 @@
     },
     "munsell": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "munsell",
         "Type": "Package",
@@ -1931,7 +2029,7 @@
     },
     "nlme": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "nlme",
         "Version": "3.1-164",
@@ -1962,7 +2060,7 @@
     },
     "openssl": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "openssl",
         "Type": "Package",
@@ -1989,9 +2087,41 @@
         "Archs": "x64"
       }
     },
+    "pander": {
+      "Source": "CRAN",
+      "Repository": null,
+      "description": {
+        "Package": "pander",
+        "Authors@R": "c(\n    person(\"Gergely\", \"Daróczi\", , \"daroczig@rapporter.net\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-3149-8537\")),\n    person(\"Roman\", \"Tsegelskyi\", , \"roman.tsegelskyi@gmail.com\", role = c(\"aut\")))",
+        "Title": "An R 'Pandoc' Writer",
+        "Type": "Package",
+        "Encoding": "UTF-8",
+        "Description": "Contains some functions catching all messages, 'stdout' and other\n    useful information while evaluating R code and other helpers to return user\n    specified text elements (like: header, paragraph, table, image, lists etc.)\n    in 'pandoc' markdown or several type of R objects similarly automatically\n    transformed to markdown format. Also capable of exporting/converting (the\n    resulting) complex 'pandoc' documents to e.g. HTML, 'PDF', 'docx' or 'odt'. This\n    latter reporting feature is supported in brew syntax or with a custom reference\n    class with a smarty caching 'backend'.",
+        "Version": "0.6.5",
+        "Date": "2022-03-17",
+        "URL": "https://rapporter.github.io/pander/",
+        "BugReports": "https://github.com/rapporter/pander/issues",
+        "License": "AGPL-3 | file LICENSE",
+        "Depends": "R (>= 2.15.0)",
+        "Imports": "grDevices, graphics, methods, utils, stats, digest, tools,\nRcpp",
+        "Suggests": "grid, lattice, ggplot2 (>= 0.9.2), sylly, sylly.en, logger,\nsurvival, microbenchmark, zoo, nlme, descr, MASS, knitr,\nrmarkdown, tables, reshape, memisc, Epi, randomForest, tseries,\ngtable, rms, forecast, data.table",
+        "SystemRequirements": "pandoc (https://johnmacfarlane.net/pandoc) for\nexporting markdown files to other formats.",
+        "LinkingTo": "Rcpp",
+        "VignetteBuilder": "knitr",
+        "RoxygenNote": "7.1.1",
+        "NeedsCompilation": "yes",
+        "Packaged": "2022-03-18 08:57:22 UTC; daroczig",
+        "Author": "Gergely Daróczi [aut, cre] (<https://orcid.org/0000-0003-3149-8537>),\n  Roman Tsegelskyi [aut]",
+        "Maintainer": "Gergely Daróczi <daroczig@rapporter.net>",
+        "Repository": "CRAN",
+        "Date/Publication": "2022-03-18 09:20:02 UTC",
+        "Built": "R 4.4.2; x86_64-w64-mingw32; 2024-12-08 01:30:07 UTC; windows",
+        "Archs": "x64"
+      }
+    },
     "pillar": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "pillar",
         "Title": "Coloured Formatting for Columns",
@@ -2024,7 +2154,7 @@
     },
     "pkgconfig": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "pkgconfig",
         "Title": "Private Configuration for 'R' Packages",
@@ -2046,9 +2176,38 @@
         "Built": "R 4.4.1; ; 2024-07-09 00:24:40 UTC; windows"
       }
     },
+    "plyr": {
+      "Source": "CRAN",
+      "Repository": null,
+      "description": {
+        "Package": "plyr",
+        "Title": "Tools for Splitting, Applying and Combining Data",
+        "Version": "1.8.9",
+        "Authors@R": "\n    person(\"Hadley\", \"Wickham\", , \"hadley@rstudio.com\", role = c(\"aut\", \"cre\"))",
+        "Description": "A set of tools that solves a common set of problems: you need\n    to break a big problem down into manageable pieces, operate on each\n    piece and then put all the pieces back together.  For example, you\n    might want to fit a model to each spatial location or time point in\n    your study, summarise data by panels or collapse high-dimensional\n    arrays to simpler summary statistics. The development of 'plyr' has\n    been generously supported by 'Becton Dickinson'.",
+        "License": "MIT + file LICENSE",
+        "URL": "http://had.co.nz/plyr, https://github.com/hadley/plyr",
+        "BugReports": "https://github.com/hadley/plyr/issues",
+        "Depends": "R (>= 3.1.0)",
+        "Imports": "Rcpp (>= 0.11.0)",
+        "Suggests": "abind, covr, doParallel, foreach, iterators, itertools,\ntcltk, testthat",
+        "LinkingTo": "Rcpp",
+        "Encoding": "UTF-8",
+        "LazyData": "true",
+        "RoxygenNote": "7.2.3",
+        "NeedsCompilation": "yes",
+        "Packaged": "2023-09-27 13:58:04 UTC; hadleywickham",
+        "Author": "Hadley Wickham [aut, cre]",
+        "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2023-10-02 06:50:08 UTC",
+        "Built": "R 4.4.1; x86_64-w64-mingw32; 2024-07-09 01:15:18 UTC; windows",
+        "Archs": "x64"
+      }
+    },
     "prettyunits": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "prettyunits",
         "Title": "Pretty, Human Readable Formatting of Quantities",
@@ -2073,7 +2232,7 @@
     },
     "processx": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "processx",
         "Title": "Execute and Control System Processes",
@@ -2102,7 +2261,7 @@
     },
     "progress": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "progress",
         "Title": "Terminal Progress Bars",
@@ -2130,7 +2289,7 @@
     },
     "promises": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "promises",
@@ -2161,7 +2320,7 @@
     },
     "ps": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "ps",
         "Title": "List, Query, Manipulate System Processes",
@@ -2189,9 +2348,35 @@
         "Archs": "x64"
       }
     },
+    "psych": {
+      "Source": "CRAN",
+      "Repository": null,
+      "description": {
+        "Package": "psych",
+        "Version": "2.4.6.26",
+        "Date": "2024-06-26",
+        "Title": "Procedures for Psychological, Psychometric, and Personality\nResearch",
+        "Authors@R": "person(\"William\", \"Revelle\", role =c(\"aut\",\"cre\"), email=\"revelle@northwestern.edu\", comment=c(ORCID  = \"0000-0003-4880-9610\") )",
+        "Description": "A general purpose toolbox developed originally for personality, psychometric theory and experimental psychology.  Functions are primarily for multivariate analysis and scale construction using factor analysis, principal component analysis, cluster analysis and reliability analysis, although others provide basic descriptive statistics. Item Response Theory is done using  factor analysis of tetrachoric and polychoric correlations. Functions for analyzing data at multiple levels include within and between group statistics, including correlations and factor analysis.  Validation and cross validation of scales developed using basic machine learning algorithms are provided, as are functions for simulating and testing particular item and test structures. Several functions  serve as a useful front end for structural equation modeling.  Graphical displays of path diagrams, including mediation models, factor analysis and structural equation models are created using basic graphics. Some of the functions are written to support a book on psychometric theory as well as publications in personality research. For more information, see the <https://personality-project.org/r/> web page.",
+        "License": "GPL (>= 2)",
+        "Imports": "mnormt,parallel,stats,graphics,grDevices,methods,lattice,nlme,\nGPArotation",
+        "Suggests": "psychTools, lavaan, lme4, Rcsdp, graph, knitr, Rgraphviz",
+        "LazyData": "yes",
+        "ByteCompile": "true",
+        "VignetteBuilder": "knitr",
+        "URL": "https://personality-project.org/r/psych/\nhttps://personality-project.org/r/psych-manual.pdf",
+        "NeedsCompilation": "no",
+        "Packaged": "2024-06-26 19:51:36 UTC; WR",
+        "Author": "William Revelle [aut, cre] (<https://orcid.org/0000-0003-4880-9610>)",
+        "Maintainer": "William Revelle <revelle@northwestern.edu>",
+        "Repository": "CRAN",
+        "Date/Publication": "2024-06-27 09:40:01 UTC",
+        "Built": "R 4.4.2; ; 2024-12-08 02:24:06 UTC; windows"
+      }
+    },
     "purrr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "purrr",
         "Title": "Functional Programming Tools",
@@ -2223,7 +2408,7 @@
     },
     "ragg": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "ragg",
@@ -2254,7 +2439,7 @@
     },
     "rappdirs": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "rappdirs",
@@ -2283,7 +2468,7 @@
     },
     "readr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "readr",
         "Title": "Read Rectangular Text Data",
@@ -2316,7 +2501,7 @@
     },
     "readxl": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "readxl",
         "Title": "Read Excel Files",
@@ -2348,7 +2533,7 @@
     },
     "rematch": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "rematch",
         "Title": "Match Regular Expressions with a Nicer 'API'",
@@ -2371,7 +2556,7 @@
     },
     "rematch2": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "rematch2",
         "Title": "Tidy Output from Regular Expression Matching",
@@ -2397,7 +2582,7 @@
     },
     "reprex": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "reprex",
         "Title": "Prepare Reproducible Example Code via the Clipboard",
@@ -2428,9 +2613,32 @@
         "Built": "R 4.4.1; ; 2024-08-02 01:54:37 UTC; windows"
       }
     },
+    "reshape": {
+      "Source": "CRAN",
+      "Repository": null,
+      "description": {
+        "Package": "reshape",
+        "Version": "0.8.9",
+        "Title": "Flexibly Reshape Data",
+        "Description": "Flexibly restructure and aggregate data using \n  just two functions: melt and cast.",
+        "Authors@R": "\n    person(\"Hadley\", \"Wickham\", , \"hadley@rstudio.com\", c(\"aut\", \"cre\"))",
+        "URL": "http://had.co.nz/reshape",
+        "Depends": "R (>= 2.6.1)",
+        "Imports": "plyr",
+        "License": "MIT + file LICENSE",
+        "LazyData": "true",
+        "NeedsCompilation": "yes",
+        "Packaged": "2022-04-12 14:33:18 UTC; hadleywickham",
+        "Author": "Hadley Wickham [aut, cre]",
+        "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2022-04-12 15:00:02 UTC",
+        "Built": "R 4.4.1; ; 2024-10-10 01:30:10 UTC; windows"
+      }
+    },
     "rlang": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "rlang",
         "Version": "1.1.4",
@@ -2462,7 +2670,7 @@
     },
     "rmarkdown": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "rmarkdown",
@@ -2492,7 +2700,7 @@
     },
     "rstudioapi": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "rstudioapi",
         "Title": "Safely Access the RStudio API",
@@ -2517,7 +2725,7 @@
     },
     "rvest": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "rvest",
         "Title": "Easily Harvest (Scrape) Web Pages",
@@ -2548,7 +2756,7 @@
     },
     "sass": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "sass",
@@ -2578,7 +2786,7 @@
     },
     "scales": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "scales",
         "Title": "Scale Functions for Visualization",
@@ -2607,7 +2815,7 @@
     },
     "selectr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "selectr",
         "Type": "Package",
@@ -2633,7 +2841,7 @@
     },
     "shiny": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "shiny",
         "Type": "Package",
@@ -2664,7 +2872,7 @@
     },
     "sourcetools": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "sourcetools",
         "Type": "Package",
@@ -2689,7 +2897,7 @@
     },
     "stringi": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "stringi",
         "Version": "1.8.4",
@@ -2719,7 +2927,7 @@
     },
     "stringr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "stringr",
         "Title": "Simple, Consistent Wrappers for Common String Operations",
@@ -2749,7 +2957,7 @@
     },
     "sys": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "sys",
         "Type": "Package",
@@ -2776,7 +2984,7 @@
     },
     "systemfonts": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Type": "Package",
         "Package": "systemfonts",
@@ -2808,7 +3016,7 @@
     },
     "textshaping": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "textshaping",
         "Title": "Bindings to the 'HarfBuzz' and 'Fribidi' Libraries for Text\nShaping",
@@ -2838,7 +3046,7 @@
     },
     "tibble": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "tibble",
         "Title": "Simple Data Frames",
@@ -2873,7 +3081,7 @@
     },
     "tidyr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "tidyr",
         "Title": "Tidy Messy Data",
@@ -2905,7 +3113,7 @@
     },
     "tidyselect": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "tidyselect",
         "Title": "Select from a Set of Strings",
@@ -2935,7 +3143,7 @@
     },
     "tidyverse": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "tidyverse",
         "Title": "Easily Install and Load the 'Tidyverse'",
@@ -2964,7 +3172,7 @@
     },
     "timechange": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "timechange",
         "Title": "Efficient Manipulation of Date-Times",
@@ -2992,7 +3200,7 @@
     },
     "tinytex": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "tinytex",
         "Type": "Package",
@@ -3018,7 +3226,7 @@
     },
     "tzdb": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "tzdb",
         "Title": "Time Zone Database Information",
@@ -3048,7 +3256,7 @@
     },
     "utf8": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "utf8",
         "Title": "Unicode Text Processing",
@@ -3076,7 +3284,7 @@
     },
     "uuid": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "uuid",
         "Version": "1.2-1",
@@ -3099,7 +3307,7 @@
     },
     "vctrs": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "vctrs",
         "Title": "Vector Helpers",
@@ -3130,7 +3338,7 @@
     },
     "viridisLite": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "viridisLite",
         "Type": "Package",
@@ -3157,7 +3365,7 @@
     },
     "vroom": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "vroom",
         "Title": "Read and Write Rectangular Text Data Quickly",
@@ -3191,7 +3399,7 @@
     },
     "withr": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "withr",
         "Title": "Run Code 'With' Temporarily Modified Global State",
@@ -3221,7 +3429,7 @@
     },
     "xfun": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "xfun",
         "Type": "Package",
@@ -3249,7 +3457,7 @@
     },
     "xml2": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "xml2",
         "Title": "Parse XML",
@@ -3281,7 +3489,7 @@
     },
     "xtable": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "xtable",
         "Version": "1.8-4",
@@ -3306,7 +3514,7 @@
     },
     "yaml": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": null,
       "description": {
         "Package": "yaml",
         "Type": "Package",
@@ -3330,8 +3538,11 @@
     }
   },
   "files": {
+    "analysis.R": {
+      "checksum": "8e54272dbd51f7dad71e8e29cc83dc47"
+    },
     "app.R": {
-      "checksum": "54aaded5c29e302bbced1197ecad1712"
+      "checksum": "e7dd4426ebf0e25488d340ec268e2a73"
     },
     "australian_weather_202412281334.csv": {
       "checksum": "07b188b963ad7253fc0da5d769eb36f6"
@@ -3342,11 +3553,20 @@
     "data/australian_weather_202412281334.csv": {
       "checksum": "07b188b963ad7253fc0da5d769eb36f6"
     },
-    "README.md": {
-      "checksum": "75fcaf352e41838013dbe566de9f49a5"
+    "data/report.Rmd": {
+      "checksum": "cd0dd2e87ffc34b512655d65510e2f50"
     },
-    "sert.RData": {
-      "checksum": "3468872aab8b3353f500c754481ee9ef"
+    "README.md": {
+      "checksum": "46729624bdc388c82d4d9a351e076c01"
+    },
+    "report.Rmd": {
+      "checksum": "69697124e2610d8d18103fbcc80bea2e"
+    },
+    "reportdf.Rmd": {
+      "checksum": "c016b2efdc39197b7851323ebeea880d"
+    },
+    "screen_app.png": {
+      "checksum": "6a20131e289173dfd81aeac978c5d983"
     }
   },
   "users": null

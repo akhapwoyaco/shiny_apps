@@ -3,6 +3,8 @@ library(readr)
 library(tidyverse)
 library(bslib)
 library(ggrepel)
+library(psych)
+library(reshape) # f
 #
 australian_weather_202412281334 <- read_csv("data/australian_weather_202412281334.csv")
 colnames(australian_weather_202412281334) <- c(
@@ -59,7 +61,13 @@ ui <- page_sidebar(
             label = "Territory", inputId =  'terri_tory', 
             choices = unique_territory)
           ,
-          uiOutput("ui_location")
+          uiOutput("ui_location"),
+          br(),
+          # source https://github.com/rstudio/shiny-examples/blob/main/016-knitr-pdf/
+          radioButtons('format', 'Document format', c('PDF', 'HTML', 'Word'),
+                       inline = TRUE),
+          br(),
+          downloadButton('downloadReport')
         )
       )
     )),
@@ -77,6 +85,14 @@ ui <- page_sidebar(
     accordion_panel(
       "Humidity",
       plotOutput('humidity_plot', height = '600px')
+    ),
+    accordion_panel(
+      "Wind",
+      plotOutput('wind_kmh_plot', height = '600px')
+    ),
+    accordion_panel(
+      "Pressure",
+      plotOutput('pressure_hpa_plot', height = '600px')
     ),
     accordion_panel(
       "Boxplot: Evaporation, Rain, Sunshine & Temperature",
@@ -107,7 +123,10 @@ server <- function(input, output, session) {
     australian_weather_202412281334 |>
       filter(
         territory %in% input$terri_tory) |>
-      select(!(territory))
+      select(!(territory)) |>
+      mutate(
+        speed_of_maximum_wind_gust_km_h = as.numeric(speed_of_maximum_wind_gust_km_h)
+      )
   })
   #' get unique groupings for grouping and update selector
   output$ui_location <- renderUI(
@@ -123,7 +142,7 @@ server <- function(input, output, session) {
   # plotting data
   australian_plot_data <- reactive({
     
-    australian_weather_202412281334[,c(1,3:7,11:13, 16:19, 22, 24)] |>
+    australian_weather_202412281334[,c(1,3:7,9,11:13, 16:19, 22, 24)] |> # 15,21 wind speed calm define calm
       filter(location == input$loca_tion) #Subset numerical values and location
   })
   australian_plot_data_2 <- reactive({
@@ -133,7 +152,7 @@ server <- function(input, output, session) {
         values_to = "Value" ) |>
       mutate(variables = str_replace_all(variables, c("_" = " ")))
   })
-  # temperature
+  # temperature ---------------------------------------------------------
   australian_temperature <- reactive({
     australian_plot_data_2() |> 
       filter(grepl("temp", variables)) 
@@ -143,10 +162,13 @@ server <- function(input, output, session) {
     req(input$terri_tory, input$loca_tion)
     # ensure df is non empty, else message
     validate(
-      need(nrow(australian_temperature()) > 0, message = "NO DATA")
+      need(nrow(australian_temperature()) > 0, message = "NO TEMPERATURE DATA")
     )
     validate(
-      need(nrow(australian_temperature()) != sum(is.na(australian_temperature()$Value)), message = "NO DATA")
+      need(
+        nrow(australian_temperature()) != sum(
+          is.na(australian_temperature()$Value)
+        ), message = "NO TEMPERATURE DATA")
     )
     #get maximum and minimum temperature data and the observation number
     data_geom_text = data.frame(
@@ -214,17 +236,19 @@ server <- function(input, output, session) {
   })
   
   
-  # Humidity
+  # Humidity -------------------------------------------------------------
   australian_humidity <- reactive({
     australian_plot_data_2() |> 
       filter(grepl("humidity", variables))
   })
   humid_plot <- reactive({
     validate(
-      need(nrow(australian_humidity()) > 0, message = "NO DATA")
+      need(nrow(australian_humidity()) > 0, message = "NO HUMIDITY DATA")
     )
     validate(
-      need(nrow(australian_humidity()) != sum(is.na(australian_humidity()$Value)), message = "NO DATA")
+      need(
+        nrow(australian_humidity()) != sum(is.na(australian_humidity()$Value)
+      ), message = "NO HUMIDITY DATA")
     )
     #get maximum and minimum humidity values and the observation number
     data_geom_text = data.frame(
@@ -254,15 +278,18 @@ server <- function(input, output, session) {
       geom_line() + theme_bw() + 
       labs(x = "Day",
            caption = "https://github.com/akhapwoyaco") +
-      geom_point(data=data.frame(x=date_min_humid,y=point_min_humid), 
-                 aes(x = x, y=y), color = "black") +
+      geom_point(
+        data = data_geom_text,
+        aes(x = date_min_humid, y = point_min_humid), color = "black") +
       geom_text(
         data = data_geom_text,
         aes(x = date_min_humid, y = point_min_humid,
             label = paste("Min humid:", point_min_humid, "Day", date_min_humid)),
         color = "black", vjust = 0.5, hjust = 1
       ) +
-      geom_point(x = date_max_humid, y = point_max_humid, color = "black") +
+      geom_point(
+        data = data_geom_text,
+        aes(x = date_max_humid, y = point_max_humid), color = "black") +
       scale_x_date(date_breaks = "1 month", date_labels = "%b %Y") +
       geom_text(
         data = data_geom_text,
@@ -272,6 +299,8 @@ server <- function(input, output, session) {
         color = "black", vjust = 0.5, hjust = -0.1) + 
       scale_y_continuous(
         labels = scales::unit_format(unit = "%")
+      ) + guides(
+        colour = guide_legend(override.aes = list(linewidth = 3))
       ) +
       theme(
         axis.title = element_blank(),
@@ -285,21 +314,22 @@ server <- function(input, output, session) {
   output$humidity_plot <- renderPlot({
     humid_plot()
   })
-  # Rainfall
+  # Rainfall ------------------------------------------------------------
   australian_Rainfall <- reactive({
     australian_plot_data_2() |> 
       filter(grepl("rain", variables))
   })
   rain_plot <- reactive({
     validate(
-      need(nrow(australian_Rainfall()) > 0, message = F)
+      need(nrow(australian_Rainfall()) > 0, message = "NO RAINFALL DATA")
     )
     validate(
-      need(nrow(australian_Rainfall()) != sum(is.na(australian_Rainfall()$Value)), message = "NO DATA")
+      need(nrow(australian_Rainfall()) != sum(is.na(australian_Rainfall()$Value)
+      ), message = "NO RAINFALL DATA")
     )
     #get maximum and minimu pressure and observation id
     data_geom_text = data.frame(
-      date_min_Rainfall = subset(
+      date_min_rain = subset(
         australian_Rainfall(), 
         australian_Rainfall()$Value == min(australian_Rainfall()$Value,
                                            na.rm = T))$date[1]
@@ -327,16 +357,19 @@ server <- function(input, output, session) {
       geom_line() + theme_bw() + 
       labs(x = "Day",
            caption = "https://github.com/akhapwoyaco") +
-      geom_point(data=data.frame(x=date_min_Rainfall,y=point_min_rain), 
-                 aes(x = x, y=y), color = "black") +
+      geom_point(
+        data = data_geom_text, 
+        aes(x=date_min_rain, y=point_min_rain), color = "black") +
       geom_text(
         data = data_geom_text,
         aes(
-          x = date_min_Rainfall, y = point_min_rain,
-          label = paste("Min Ranfall:", point_min_rain, "Day", date_min_Rainfall)
+          x = date_min_rain, y = point_min_rain,
+          label = paste("Min Rainfall:", point_min_rain, "Day", date_min_rain)
         ), 
         color = "black", vjust = 0.5, hjust = -0.1) +
-      geom_point(x = date_max_rain, y = point_max_rain, color = "black") +
+      geom_point(
+        data = data_geom_text, 
+        aes(x=date_max_rain, y=point_max_rain), color = "black") +
       geom_text(
         data = data_geom_text,
         aes(x = date_max_rain, y = point_max_rain,
@@ -360,6 +393,170 @@ server <- function(input, output, session) {
   output$rainfall_plot <- renderPlot({
     rain_plot()
   })
+  #
+  # wind ----------------------------------------------------------------
+  australian_wind <- reactive({
+    australian_plot_data_2() |> 
+      filter(grepl("wind", variables))
+  })
+  #
+  wind_plot <- reactive({
+    validate(
+      need(nrow(australian_wind()) > 0, message = "NO MAXIMUM WIND SPEED DATA")
+    )
+    validate(
+      need(
+        nrow(australian_wind()) != sum(is.na(australian_wind()$Value)
+                                       ), message = "NO MAXIMUM WIND SPEED DATA")
+    )
+    #get maximum and minimu pressure and observation id
+    data_geom_text = data.frame(
+      date_min_wind = subset(
+        australian_wind(), 
+        australian_wind()$Value == min(australian_wind()$Value,
+                                       na.rm = T))$date[1]
+      ,point_min_wind = subset(
+        australian_wind(), 
+        australian_wind()$Value == min(australian_wind()$Value, 
+                                       na.rm = T))$Value[1]
+      #
+      ,date_max_wind = subset(
+        australian_wind(), 
+        australian_wind()$Value == max(australian_wind()$Value, 
+                                       na.rm = T))$date[1]
+      ,point_max_wind = subset(
+        australian_wind(), 
+        australian_wind()$Value == max(australian_wind()$Value, 
+                                       na.rm = T))$Value[1]
+      #
+    )
+    #
+    australian_wind() |> 
+      ggplot(aes(x = date, y = Value, color = variables)) +
+      geom_point(aes(shape = variables), size = 0.5) +
+      geom_line() + theme_bw() + 
+      labs(x = "Day",
+           caption = "https://github.com/akhapwoyaco") +
+      geom_point(
+        data = data_geom_text, 
+        aes(x=date_min_wind, y=point_min_wind), color = "black") +
+      geom_text(
+        data = data_geom_text,
+        aes(
+          x = date_min_wind, y = point_min_wind,
+          label = paste("Min Wind:", point_min_wind, "Day", date_min_wind)
+        ), 
+        color = "black", vjust = 0.5, hjust = -0.1) +
+      geom_point(
+        data = data_geom_text, 
+        aes(x=date_max_wind, y=point_max_wind), color = "black") +
+      geom_text(
+        data = data_geom_text,
+        aes(x = date_max_wind, y = point_max_wind,
+            label = paste("Max Wind:", point_max_wind, "Day:", date_max_wind)
+        ), 
+        color = "black", vjust = 0.5, hjust = -0.1)  +
+      scale_x_date(date_breaks = "1 month", date_labels = "%b %Y") +
+      scale_y_continuous(
+        labels = scales::unit_format(unit = 'km/hr')
+      ) +
+      theme(
+        axis.title = element_blank(),
+        legend.position = 'none'#,
+        # legend.text = element_text(face = 'bold', size = rel(1.2)),
+        # legend.background = element_blank(),
+        # legend.key = element_blank(),
+        # legend.title = element_blank()
+      )
+  })
+  #
+  output$wind_kmh_plot <- renderPlot({
+    wind_plot()
+  })
+  # PRESSURE ------------------------------------------------
+  #
+  australian_pressure <- reactive({
+    australian_plot_data_2() |> 
+      filter(grepl("pressure", variables))
+  })
+  #
+  pressure_plot <- reactive({
+    validate(
+      need(nrow(australian_pressure()) > 0, message = "NO PRESSURE DATA")
+    )
+    validate(
+      need(
+        nrow(australian_pressure()) != sum(is.na(australian_pressure()$Value)
+        ), message = "NO PRESSURE DATA")
+    )
+    #get maximum and minimu pressure and observation id
+    data_geom_text = data.frame(
+      date_min_pressure = subset(
+        australian_pressure(), 
+        australian_pressure()$Value == min(australian_pressure()$Value,
+                                       na.rm = T))$date[1]
+      ,point_min_pressure = subset(
+        australian_pressure(), 
+        australian_pressure()$Value == min(australian_pressure()$Value, 
+                                       na.rm = T))$Value[1]
+      #
+      ,date_max_pressure = subset(
+        australian_pressure(), 
+        australian_pressure()$Value == max(australian_pressure()$Value, 
+                                       na.rm = T))$date[1]
+      ,point_max_pressure = subset(
+        australian_pressure(), 
+        australian_pressure()$Value == max(australian_pressure()$Value, 
+                                       na.rm = T))$Value[1]
+    )
+    #
+    australian_pressure() |> 
+      ggplot(aes(x = date, y = Value, color = variables)) +
+      geom_point(aes(shape = variables), size = 0.5) +
+      geom_line() + theme_bw() + 
+      labs(x = "Day",
+           caption = "https://github.com/akhapwoyaco") +
+      geom_point(
+        data = data_geom_text, 
+        aes(x=date_min_pressure, y=point_min_pressure), color = "black") +
+      geom_text(
+        data = data_geom_text,
+        aes(
+          x = date_min_pressure, y = point_min_pressure,
+          label = paste("Min pressure:", point_min_pressure, "Day", date_min_pressure)
+        ), 
+        color = "black", vjust = 0.5, hjust = -0.1) +
+      geom_point(
+        data = data_geom_text, 
+        aes(x=date_max_pressure, y=point_max_pressure), color = "black") +
+      geom_text(
+        data = data_geom_text,
+        aes(x = date_max_pressure, y = point_max_pressure,
+            label = paste("Max pressure:", point_max_pressure, "Day:", date_max_pressure)
+        ), 
+        color = "black", vjust = 0.5, hjust = -0.1)  +
+      scale_x_date(date_breaks = "1 month", date_labels = "%b %Y") +
+      scale_y_continuous(
+        labels = scales::unit_format(unit = 'hPa')
+      ) + 
+      guides(
+        colour = guide_legend(override.aes = list(linewidth = 3))
+      ) +
+      theme(
+        axis.title = element_blank(),
+        legend.position = 'top',
+        legend.text = element_text(face = 'bold', size = rel(1.2)),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.title = element_blank()
+      )
+  })
+  #
+  output$pressure_hpa_plot <- renderPlot({
+    pressure_plot()
+  })
+  #
+  # BOXPLOTS ---------------------------------------------------------
   # temp rain monthly boxplot
   australian_monthly_data_agg_long <- reactive({
     australian_plot_data() |> 
@@ -429,6 +626,39 @@ server <- function(input, output, session) {
   output$temp_rain_boxplot_9am_3pm <- renderPlot({
     temp_rain_boxplot_9am_3pm_plots()
   })
+  #
+  
+  
+  #
+  # Download Report
+  output$downloadReport <- downloadHandler(
+    filename = function() {
+      paste('my-report', sep = '.', switch(
+        input$format, PDF = 'pdf', HTML = 'html', Word = 'docx'
+      ))
+    },
+    
+    content = function(file) {
+      src <- normalizePath('report.Rmd')
+      
+      # temporarily switch to the temp dir, in case you do not have write
+      # permission to the current working directory
+      owd <- setwd(tempdir())
+      on.exit(setwd(owd))
+      file.copy(src, 'report.Rmd', overwrite = TRUE)
+      
+      library(rmarkdown)
+      out <- render('report.Rmd', switch(
+        input$format,
+        PDF = pdf_document(toc = TRUE, toc_depth = 4), 
+        HTML = html_document(toc = TRUE, toc_depth = 4), 
+        Word = word_document(toc = TRUE, toc_depth = 4)
+      )
+      )
+      file.rename(out, file)
+    }
+  )
+  #
 }
 
 shinyApp(ui, server)

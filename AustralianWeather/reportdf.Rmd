@@ -1,8 +1,10 @@
-# WEBSCRAPPING: Australian Daily Weather
+# Introduction
 
--   Scrapped from: <http://www.bom.gov.au/climate/dwo/index.shtml>
--   Scrapping Code: <https://github.com/akhapwoyaco/WEBSCRAPPING/tree/main/AustralianWeather>
--   Shiny App: <https://01940e82-7881-ac23-953c-68da09cea0f0.share.connect.posit.cloud/>
+Australia Daily Weather Observations list observations of a number of weather elements each day for a month. Included are daily minimum and maximum temperature, rainfall, strongest wind gust, evaporation, and sunshine, together with values at 9am and 3pm of temperature, humidity, wind, cloud and pressure provided by the Australian Bureau of Meteorology.
+
+Data is scrapped from [Australian Bureau of Meteorology](http://www.bom.gov.au/climate/dwo/index.shtml) and covers 01 November 2023 to 27th December 2024. The acquisition was part of a web scrapping project, [webscrapping Australian Weather data](https://github.com/akhapwoyaco/WEBSCRAPPING/tree/main/AustralianWeather) and subsequent building of an R Shiny App [Daily Weather Observation](https://01940e82-7881-ac23-953c-68da09cea0f0.share.connect.posit.cloud/).
+
+# Data Description
 
 ### Data Details
 
@@ -31,6 +33,5 @@
 |  | Spd | Wind speed averaged over 10 minutes prior to 3 pm kilometres per | hour |
 |  | MSLP | Atmospheric pressure reduced to mean sea level at 3 pm | hectopascals |
 
-### Shiny App
+# EDA
 
-![Australian Weather](screen_app.png)
