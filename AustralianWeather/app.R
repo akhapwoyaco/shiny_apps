@@ -67,7 +67,12 @@ ui <- page_sidebar(
           radioButtons('format', 'Document format', c('PDF', 'HTML', 'Word'),
                        inline = TRUE),
           br(),
-          downloadButton('downloadReport')
+          downloadButton('downloadReport'),
+          br(),
+          br(),
+          actionButton(inputId='fiver', label="Fiver R Shiny Services", 
+                       icon = icon("th"), 
+                       onclick ="window.open('https://www.fiverr.com/s/jj5dYam', '_blank')")
         )
       )
     )),
