@@ -218,6 +218,26 @@ wind_plot()
 The minimum and maximum of the maximum `WindGust` speeds along with the days they were experienced, ie `r data_geom_text_w$point_min_wind` on `r data_geom_text_w$date_min_wind` and `r data_geom_text_w$point_max_wind` on `r data_geom_text_w$date_max_wind`.
 
 \newpage
+
+### Time of Maximum Wind Gust: Which time of day and weekday do we experience maximum wind gust
+
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=10, fig.height=8, fig.cap='Maximum Wind Gust Frequency'}
+wind_maxtime_plot()
+```
+
+### Direction of Maximum Wind Gust: Which month and direction does the Wind Gust move to (Excludes Missing Directions)
+
+```{r}
+# australian_wind_direction() |> 
+#   pivot_wider(
+#     names_from = direction_of_maximum_wind_gust, values_from = n) |>
+#   knitr::kable(caption = "Frequency of wind direction")
+```
+
+```{r,warning=FALSE,message=FALSE,attr.source='.numberLines',attr.output='.numberLines', fig.align='center', dpi = 450, fig.width=10, fig.height=8, fig.cap='Maximum Wind Gust Direction Frequency'}
+wind_direction_plot()
+```
+
 \newpage
 ### Pressure: Where and when do we experience maximum and minimum pressure?
 

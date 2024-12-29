@@ -91,9 +91,19 @@ ui <- page_sidebar(
       plotOutput('wind_kmh_plot', height = '600px')
     ),
     accordion_panel(
+      "Time of Maximum Wind Gust",
+      plotOutput('wind_time_plot', height = '600px')
+    ),
+    accordion_panel(
+      "Direction of Maximum Wind Gust",
+      plotOutput('wind_dir_max_gust_plot', height = '600px')
+    ),
+    accordion_panel(
       "Pressure",
       plotOutput('pressure_hpa_plot', height = '600px')
     ),
+    
+    
     accordion_panel(
       "Boxplot: Evaporation, Rain, Sunshine & Temperature",
       plotOutput('temp_rain_boxplot', height = '700px')
@@ -142,11 +152,17 @@ server <- function(input, output, session) {
   # plotting data
   australian_plot_data <- reactive({
     
-    australian_weather_202412281334[,c(1,3:7,9,11:13, 16:19, 22, 24)] |> # 15,21 wind speed calm define calm
+    australian_weather_202412281334[,c(1,3:7,9,11:13, 16:19, 22, 24,  8, 10)] |> # 15,21 wind speed calm define calm
       filter(location == input$loca_tion) #Subset numerical values and location
   })
+  #
+  australian_plot_data_1 <- reactive({
+    australian_plot_data()
+  })
+  #
   australian_plot_data_2 <- reactive({
-    australian_plot_data() |> select(-location) |>
+    australian_plot_data_1()  |> 
+      select(-location, -time_of_maximum_wind_gust, -direction_of_maximum_wind_gust) |>
       pivot_longer(
         cols = !date, names_to = "variables",
         values_to = "Value" ) |>
@@ -248,7 +264,7 @@ server <- function(input, output, session) {
     validate(
       need(
         nrow(australian_humidity()) != sum(is.na(australian_humidity()$Value)
-      ), message = "NO HUMIDITY DATA")
+        ), message = "NO HUMIDITY DATA")
     )
     #get maximum and minimum humidity values and the observation number
     data_geom_text = data.frame(
@@ -407,7 +423,7 @@ server <- function(input, output, session) {
     validate(
       need(
         nrow(australian_wind()) != sum(is.na(australian_wind()$Value)
-                                       ), message = "NO MAXIMUM WIND SPEED DATA")
+        ), message = "NO MAXIMUM WIND SPEED DATA")
     )
     #get maximum and minimu pressure and observation id
     data_geom_text = data.frame(
@@ -473,6 +489,118 @@ server <- function(input, output, session) {
   output$wind_kmh_plot <- renderPlot({
     wind_plot()
   })
+  
+  # Time of Maximum Wind Gust
+  #
+  australian_wind_maxtime <- reactive({
+    australian_plot_data_1() |> 
+      select(time_of_maximum_wind_gust, date) |>
+      mutate(
+        hour = lubridate::hour(time_of_maximum_wind_gust), 
+        month = month(date, label = T, abbr = T),
+        weekday = lubridate::wday(date, label = T)) |> 
+      # select(hour, month) |> 
+      group_by(weekday, hour) |> 
+      summarise(n = n()) |>
+      mutate(
+        hour_day = case_when(
+          hour == 0 ~ '12 am',
+          hour > 0 & hour < 12 ~ paste(hour, 'am', sep = ' '),
+          hour == 12 ~ '12 pm',
+          hour > 12 ~ paste(hour-12, 'pm', sep = ' ')
+        )) |>
+      mutate(
+        hour_day = factor(
+          hour_day, 
+          levels =  c("12 am","1 am","2 am","3 am","4 am","5 am",
+                      "6 am","7 am", "8 am", "9 am","10 am","11 am",
+                      "12 pm", "1 pm","2 pm","3 pm","4 pm","5 pm",
+                      "6 pm","7 pm", "8 pm", "9 pm", "10 pm","11 pm") 
+        )
+      ) |> drop_na() 
+  })
+  wind_maxtime_plot <- reactive({
+    validate(
+      need(nrow(australian_wind_maxtime()) > 0, 
+           message = "NO WIND GUST MAXIMUM TIME DATA")
+    )
+    validate(
+      need(
+        nrow(australian_wind_maxtime()) != sum(is.na(australian_wind_maxtime()$n)
+        ), message = "NO WIND GUST MAXIMUM TIME DATA")
+    )
+    australian_wind_maxtime() |> 
+      ggplot(aes(x = weekday, y = hour_day, fill = n)) + 
+      geom_tile(color = 'white', linewidth = 0.1) + 
+      geom_text(aes(label = n), fontface = 'bold',colour = 'black') +
+      scale_fill_gradient(low = 'yellow', high = 'red') + 
+      hrbrthemes::theme_modern_rc() +
+      theme(
+        legend.title = element_blank(),
+        legend.position = 'none', 
+        axis.text = element_text(face = 'bold', size = rel(1.5)),
+        axis.title = element_blank()
+      ) 
+  })
+  #
+  output$wind_time_plot <- renderPlot({
+    wind_maxtime_plot()
+  })
+  #
+  # direction on maximum wind gust
+  #
+  australian_wind_direction <- reactive({
+    australian_plot_data_1() |> 
+      select(direction_of_maximum_wind_gust, date) |>
+      mutate(
+        month = month(date, label = T, abbr = T) 
+      ) |> 
+      group_by(month, direction_of_maximum_wind_gust) |> 
+      summarise(n = n()) |> 
+      mutate(
+        direction_of_maximum_wind_gust = factor(
+          direction_of_maximum_wind_gust, 
+          levels =  c(
+            "N", "NNE", "NE", "ENE", 
+            "E", "ESE", "SE", "SSE", 
+            "S", "SSW", "SW", "WSW",
+            "W", "WNW", "NW", "NNW"
+          )
+        )
+      ) |>
+      drop_na() 
+  })
+  #
+  wind_direction_plot <- reactive({
+    #
+    validate(
+      need(nrow(australian_wind_direction()) > 0,
+           message = "NO MAXIMUM WIND DIRECTION DATA")
+    )
+    validate(
+      need(
+        nrow(australian_wind_direction()) != sum(
+          is.na(australian_wind_direction()$n)
+        ), message = "NO MAXIMUM WIND DIRECTION DATA")
+    )
+    australian_wind_direction() |> 
+      ggplot(aes(x = month, y = direction_of_maximum_wind_gust, fill = n)) + 
+      geom_tile(color = 'white', linewidth = 0.1) + 
+      geom_text(aes(label = n), fontface = 'bold', colour = 'black') +
+      scale_fill_gradient(low = 'yellow', high = 'red') + 
+      hrbrthemes::theme_modern_rc() +
+      theme(
+        legend.title = element_blank(),
+        legend.position = 'none', 
+        axis.text = element_text(face = 'bold', size = rel(1.5)),
+        axis.title = element_blank()
+      )
+  })
+  #
+  output$wind_dir_max_gust_plot <- renderPlot({
+    wind_direction_plot()
+  })
+  #
   # PRESSURE ------------------------------------------------
   #
   australian_pressure <- reactive({
@@ -494,20 +622,20 @@ server <- function(input, output, session) {
       date_min_pressure = subset(
         australian_pressure(), 
         australian_pressure()$Value == min(australian_pressure()$Value,
-                                       na.rm = T))$date[1]
+                                           na.rm = T))$date[1]
       ,point_min_pressure = subset(
         australian_pressure(), 
         australian_pressure()$Value == min(australian_pressure()$Value, 
-                                       na.rm = T))$Value[1]
+                                           na.rm = T))$Value[1]
       #
       ,date_max_pressure = subset(
         australian_pressure(), 
         australian_pressure()$Value == max(australian_pressure()$Value, 
-                                       na.rm = T))$date[1]
+                                           na.rm = T))$date[1]
       ,point_max_pressure = subset(
         australian_pressure(), 
         australian_pressure()$Value == max(australian_pressure()$Value, 
-                                       na.rm = T))$Value[1]
+                                           na.rm = T))$Value[1]
     )
     #
     australian_pressure() |> 
@@ -560,6 +688,7 @@ server <- function(input, output, session) {
   # temp rain monthly boxplot
   australian_monthly_data_agg_long <- reactive({
     australian_plot_data() |> 
+      select(-time_of_maximum_wind_gust, -direction_of_maximum_wind_gust) |>
       mutate(
         month = month(date, label = T, abbr = T)
       ) |>
@@ -636,8 +765,8 @@ server <- function(input, output, session) {
       paste(
         paste('DWO', input$terri_tory, input$loca_tion, sep = "_"),
         sep = '.', switch(
-        input$format, PDF = 'pdf', HTML = 'html', Word = 'docx'
-      ))
+          input$format, PDF = 'pdf', HTML = 'html', Word = 'docx'
+        ))
     },
     
     content = function(file) {
