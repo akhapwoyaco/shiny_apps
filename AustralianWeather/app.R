@@ -4,6 +4,7 @@ library(tidyverse)
 library(bslib)
 library(ggrepel)
 library(psych)
+library(hrbrthemes)
 library(reshape) # f
 #
 australian_weather_202412281334 <- read_csv("data/australian_weather_202412281334.csv")
