@@ -633,7 +633,9 @@ server <- function(input, output, session) {
   # Download Report
   output$downloadReport <- downloadHandler(
     filename = function() {
-      paste('my-report', sep = '.', switch(
+      paste(
+        paste('DWO', input$terri_tory, input$loca_tion, sep = "_"),
+        sep = '.', switch(
         input$format, PDF = 'pdf', HTML = 'html', Word = 'docx'
       ))
     },
