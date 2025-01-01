@@ -77,7 +77,7 @@ ui <- fluidPage(
       
     }
     #county_input, #health_grouping_input, #data_grouping_name_input, #download_image {
-       background-color: black;
+      background-color: black;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -88,9 +88,11 @@ ui <- fluidPage(
       
       background-color: black;
       border: 0.5px solid #fff;
-      padding: 6px 12px;
+      padding: inherit; /*give padding below selected*/
       display: inline-block;
-      width: 100%;
+      
+      
+      
       position: relative;
       z-index: 1;
       box-sizing: border-box;
@@ -98,6 +100,9 @@ ui <- fluidPage(
       border-radius: 0px;
       color: white;
 
+    }
+    .shiny-input-container:not(.shiny-input-container-inline) {
+      width: 100% !important; /*Yeap Definitely wanted the drop downs to be centerd*/
     }
     "))),
   titlePanel("Health Metrics"),

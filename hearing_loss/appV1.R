@@ -75,7 +75,9 @@ server <- function(input, output, session) {
   })
   #
   model_table_1 <- reactive({
-    
+    validate(
+      need(length(model_output()) > 0, message = "NO MODEL YET, SELECT RHS VARIABLE")
+    )
     model_tibble = lapply(model_output(), glance, simplify = F)
     print(model_tibble)
     table <- dplyr::bind_rows(model_tibble, .id = "model") #|> 
@@ -88,6 +90,9 @@ server <- function(input, output, session) {
   })
   #
   model_table_2 <- reactive({
+    validate(
+      need(length(model_output()) > 0, message = "NO MODEL YET, SELECT RHS VARIABLE")
+    )
     model_tibble = lapply(model_output(), tidy, simplify = F)
     table <- dplyr::bind_rows(model_tibble, .id = "model") |> 
       select(model, term, estimate) |>
@@ -103,6 +108,9 @@ server <- function(input, output, session) {
   #   stargazer::stargazer(HearingLoss,summary = TRUE, type="html")
   # })
   output$data_summary <- DT::renderDataTable({
+    # validate(
+    #   need(nrow(model_table_2())>0, message = "NO DATA")
+    # )
     model_table_2() |> 
       datatable(
         options = list(
@@ -113,6 +121,9 @@ server <- function(input, output, session) {
             "}")), rownames = F)
   })
   output$ml_summary <- DT::renderDataTable({
+    # validate(
+    #   need(nrow(model_table_1())>0, message = "NO DATA")
+    # )
     model_table_1() |> 
       datatable(
         options = list(
@@ -124,6 +135,9 @@ server <- function(input, output, session) {
   })
   
   output$log_p_plot <- renderPlot({
+    # validate(
+    #   need(nrow(model_table_1())>0, message = "NO DATA")
+    # )
     # print(colnames(model_table_1()))
     model_table_1() |> 
       mutate(
@@ -144,6 +158,9 @@ server <- function(input, output, session) {
   })
   #
   output$my_summary_table <- renderPlot({
+    # validate(
+    #   need(nrow(HearingLoss)>0, message = "NO DATA")
+    # )
     b <- boxplot(
       HearingLoss,
                xaxt="n",border = "white",col = "black",

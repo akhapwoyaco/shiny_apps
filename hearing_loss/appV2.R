@@ -88,6 +88,9 @@ server <- function(input, output, session) {
   })
   #
   model_perfomance_table <- reactive({
+    validate(
+      need(length(model_output()) > 0, message = "NO MODEL YET, SELECT RHS VARIABLE")
+    )
     model_tibble = lapply(model_output(), glance, simplify = F)
     table <- dplyr::bind_rows(model_tibble, .id = "model")
     table |> 
@@ -95,6 +98,9 @@ server <- function(input, output, session) {
   })
   #
   model_coef_table <- reactive({
+    validate(
+      need(length(model_output()) > 0, message = "NO MODEL YET, SELECT RHS VARIABLE")
+    )
     model_tibble = lapply(model_output(), tidy, simplify = F)
     table <- dplyr::bind_rows(model_tibble, .id = "model") |> 
       select(model, term, estimate) |>
