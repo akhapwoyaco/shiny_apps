@@ -12,7 +12,7 @@ load('data/weather.RData')
 load('data/geo_data.RData')    
 #
 uniq_counties = c("ALL", unique(counties_data$county))
-kenya_county <- kenya_county |> rename(uid = shapeID)
+kenya_county <- kenya_county |> dplyr::rename(uid = shapeID)
 #
 ui <- fluidPage(
   tags$head(

@@ -2393,13 +2393,13 @@
   },
   "files": {
     "app.R": {
-      "checksum": "faa19c27b89737d1202365f86156cf28"
+      "checksum": "ef13968f5e2da5664e0c2a04bbf599ee"
     },
     "data/KeyHealthMetrics.csv": {
       "checksum": "7fd0ee1fd02d7a51cc2f42041b47a2c4"
     },
     "health_png.png": {
-      "checksum": "8beaf2295add872e39f6faaf63e4e5e2"
+      "checksum": "b4752e5f22ca4ee9831152bc7a033ad5"
     },
     "trials/app.R": {
       "checksum": "03a7fe50213e0aa40fbe7fe2600bc2d8"

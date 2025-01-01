@@ -122,6 +122,9 @@ ui <- fluidPage(
       border-radius: 1px;
       color: white;
     }
+    .shiny-input-container:not(.shiny-input-container-inline) {
+      width: 100% !important; /*Yeap Definitely wanted the drop downs to be centerd*/
+    }
     "))),
   fluidRow(
     class = "drop_down_cols",
