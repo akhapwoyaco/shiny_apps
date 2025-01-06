@@ -1,0 +1,43 @@
+<html>
+
+<head>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script async>
+$(".header").click(function () {
+
+    $header = $(this);
+    //getting the next element
+    $content = $header.next();
+    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+    $content.slideToggle(500, function () {
+        //execute this after slideToggle is done
+        //change text of header based on visibility of content div
+        $header.text(function () {
+            //change text based on condition
+            return $content.is(":visible") ? "Collapse" : "Expand";
+        });
+    });
+
+});
+</script>
+<title>Title</title>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="header"><span>Expand</span>
+
+    </div>
+    <div class="content", style="display: none; padding : 5px;">
+        <ul>
+            <li>This is just some random content.</li>
+            <li>This is just some random content.</li>
+            <li>This is just some random content.</li>
+            <li>This is just some random content.</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

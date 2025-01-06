@@ -12,3 +12,6 @@
 *.tff
 *.RData
 **.RData
+**.zip
+__pycache__
+FINAL_REPORT/

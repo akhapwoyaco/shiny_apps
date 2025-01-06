@@ -1,0 +1,26 @@
+---
+title: "World Fairs"
+author: "Christopher Obuchere"
+format: closeread-html
+---
+
+:::{.epigraph}
+> [The Visual Display of Quantitative Information](https://www.edwardtufte.com/tufte/books_vdqi) by Edward Tufte is a seminal text in the field of data visualization. On page 40, the text walks the reader through the complexity of a graphic by Charles Minard[^map] that depicts Napoleon's disastrous military campaign in Russia. An excerpt from that chapter is printed below, with permission[^text].
+:::
+
+
+Hello World! Please read my Closeread story below.
+
+:::{.cr-section}
+
+Closeread enables scrollytelling.
+
+Draw your readers attention with focus effects. @cr-features
+
+:::{#cr-features}
+1. Highlighting
+2. Zooming
+3. Panning
+:::
+
+:::

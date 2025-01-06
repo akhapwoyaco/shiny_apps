@@ -38,9 +38,13 @@ Weather Data
 
 ## [Hearing Loss](./hearing_loss)
 
-- [Hearing loss Linear Regression: Prediction of Hearing Frequencies based on Age](./hearing_loss/appV2.R)
-- [Hearing Loss Classification: Classification according to diagnosis](./hearing_loss/appV3.R)
+-   [Hearing loss Linear Regression: Prediction of Hearing Frequencies based on Age](./hearing_loss/appV2.R)
+-   [Hearing Loss Classification: Classification according to diagnosis](./hearing_loss/appV3.R)
+
+## [Python Capital Cities Quiz Shiny](Country%20Capitals%20Py%20Shiny)
+
+Porting previous project of a Python Class, I used to create a Country Capital City Quiz
 
 # TODO
 
-+ Center the inputs within divs
+-   Center the inputs within divs
