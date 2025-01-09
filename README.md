@@ -45,6 +45,6 @@ Weather Data
 
 Porting previous project of a Python Class, I used to create a Country Capital City Quiz
 
-# TODO
+![Cities App](./Country%20Capitals%20Py%20Shiny/cities_app.png) \# TODO
 
 -   Center the inputs within divs
