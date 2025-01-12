@@ -130,7 +130,7 @@ class QuizUI:
         self.ui = ui.page_fluid(
             ui.panel_title("Country Capitals Cities Quiz"),
             ui.layout_sidebar(
-                ui.sidebar(
+                ui.sidebar( 
                     ui.input_text("player_name", "Player Name:", placeholder="Enter your name"),
                     ui.input_numeric("num_questions", "Number of Questions:", value=5, min=1, max = len(quiz_data.country_city_dictionary)-1), # questions limited to number of countries
                     ui.input_action_button("start_quiz", "Start Quiz", class_="btn-primary"),
